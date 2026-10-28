@@ -2,6 +2,24 @@ const REPOS_URL = "https://api.github.com/users/yuchen310/repos?sort=updated&per
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+const themeToggle = document.getElementById("theme-toggle");
+
+function syncThemeToggle() {
+  themeToggle.setAttribute("aria-pressed", String(document.body.classList.contains("dark")));
+}
+
+themeToggle.addEventListener("click", () => {
+  const dark = document.body.classList.toggle("dark");
+  try {
+    sessionStorage.setItem("theme", dark ? "dark" : "light");
+  } catch {
+    // Storage unavailable (e.g. blocked site data): the toggle still works for this page view.
+  }
+  syncThemeToggle();
+});
+
+syncThemeToggle();
+
 function repoCard(repo) {
   const card = document.createElement("li");
   card.className = "card";
