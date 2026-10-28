@@ -20,6 +20,17 @@ themeToggle.addEventListener("click", () => {
 
 syncThemeToggle();
 
+const backToTop = document.getElementById("back-to-top");
+
+// Show the button only once #hero has scrolled fully out of view.
+new IntersectionObserver(([entry]) => {
+  backToTop.hidden = entry.isIntersecting;
+}).observe(document.getElementById("hero"));
+
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0 });
+});
+
 function repoCard(repo) {
   const card = document.createElement("li");
   card.className = "card";
