@@ -1,4 +1,6 @@
 const REPOS_URL = "https://api.github.com/users/yuchen310/repos?sort=updated&per_page=12";
+// Only these repos are shown in #repos; their data still comes from the API.
+const FEATURED_REPOS = ["yuchen-site", "yuchen-site-tests"];
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -75,8 +77,9 @@ async function loadRepos() {
     });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-    const repos = await response.json();
-    if (!Array.isArray(repos) || repos.length === 0) {
+    const data = await response.json();
+    const repos = Array.isArray(data) ? data.filter((repo) => FEATURED_REPOS.includes(repo.name)) : [];
+    if (repos.length === 0) {
       status.textContent = "No public repositories yet.";
       return;
     }
