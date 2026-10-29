@@ -21,15 +21,18 @@ themeToggle.addEventListener("click", () => {
 syncThemeToggle();
 
 const backToTop = document.getElementById("back-to-top");
+const hero = document.getElementById("hero");
 
-// Show the button only once #hero has scrolled fully out of view.
-new IntersectionObserver(([entry]) => {
-  backToTop.hidden = entry.isIntersecting;
-}).observe(document.getElementById("hero"));
+if (backToTop && hero) {
+  // Show the button only once #hero has scrolled fully out of view.
+  new IntersectionObserver(([entry]) => {
+    backToTop.hidden = entry.isIntersecting;
+  }).observe(hero);
 
-backToTop.addEventListener("click", () => {
-  window.scrollTo({ top: 0 });
-});
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0 });
+  });
+}
 
 function repoCard(repo) {
   const card = document.createElement("li");
@@ -85,4 +88,7 @@ async function loadRepos() {
   }
 }
 
-loadRepos();
+// Only the home page has a repo list.
+if (document.getElementById("repos-list")) {
+  loadRepos();
+}
