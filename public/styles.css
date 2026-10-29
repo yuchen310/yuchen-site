@@ -848,28 +848,35 @@ code {
   }
 }
 
-/* Screenshot captions, and pairs shown side by side on wide screens. */
+/* Screenshot captions, and pairs or galleries shown in two columns on wide screens. */
 .screenshot figcaption {
   margin-top: 0.5rem;
   color: var(--muted);
   font-size: 0.875rem;
 }
 
-.screenshot-pair {
+.screenshot-pair,
+.gallery {
   display: grid;
   gap: 1.5rem 1rem;
   margin-top: 1.5rem;
 }
 
-.screenshot-pair .screenshot {
+.screenshot-pair .screenshot,
+.gallery .screenshot {
   margin: 0;
   min-width: 0;
 }
 
 @media (min-width: 40rem) {
-  .screenshot-pair {
+  .screenshot-pair,
+  .gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+.case-study .gallery + .prose {
+  margin-top: 1.25rem;
 }
 
 /* Stacked branching diagram: centre the steps so both branches hang below the last one. */
