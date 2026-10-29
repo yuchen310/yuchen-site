@@ -67,49 +67,21 @@
         <h2>What I built</h2>
         <p class="prose">I owned the cost-calculation component. It is the single place where every price in an order is worked out: rental cost, security deposit, delivery fee and final total. Checkout and the cart never calculate prices themselves; they call my component through its <code>ICostCalculation</code> interface. Delivery fees come from the shipping module through its <code>IShippingOptionService</code> interface, so pricing does not depend on how shipping works internally. While the shipping team's implementation was unfinished, a stub service stood in behind the same interface, so integration did not block development.</p>
 
-        <figure class="diagram">
-          <div class="diagram-scroll" role="region" aria-label="Order flow diagram" tabindex="0">
-            <svg viewBox="0 0 720 176" role="img" aria-labelledby="flow-title flow-desc">
-              <title id="flow-title">Order flow through the cost-calculation component</title>
-              <desc id="flow-desc">Cart leads to Checkout, then to Cost Calculation (my component), then to Payment, then to Order. A dashed arrow runs from the Shipping module, through its IShippingOptionService interface, into Cost Calculation.</desc>
-              <defs>
-                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path class="diagram-arrowhead" d="M0 0 L10 5 L0 10 z"/>
-                </marker>
-              </defs>
-
-              <!-- Shipping module feeding cost calculation -->
-              <rect class="diagram-box diagram-box-external" x="262" y="8" width="196" height="52" rx="8"/>
-              <text class="diagram-label" x="360" y="26">Shipping module</text>
-              <text class="diagram-sublabel" x="360" y="44">IShippingOptionService</text>
-              <line class="diagram-line diagram-line-dashed" x1="360" y1="60" x2="360" y2="106" marker-end="url(#arrow)"/>
-
-              <!-- Main flow -->
-              <rect class="diagram-box" x="8" y="108" width="100" height="56" rx="8"/>
-              <text class="diagram-label" x="58" y="136">Cart</text>
-
-              <rect class="diagram-box" x="140" y="108" width="100" height="56" rx="8"/>
-              <text class="diagram-label" x="190" y="136">Checkout</text>
-
-              <rect class="diagram-box diagram-box-mine" x="272" y="108" width="176" height="56" rx="8"/>
-              <text class="diagram-label" x="360" y="127">Cost Calculation</text>
-              <text class="diagram-sublabel diagram-sublabel-mine" x="360" y="147">my component</text>
-
-              <rect class="diagram-box" x="480" y="108" width="100" height="56" rx="8"/>
-              <text class="diagram-label" x="530" y="136">Payment</text>
-
-              <rect class="diagram-box" x="612" y="108" width="100" height="56" rx="8"/>
-              <text class="diagram-label" x="662" y="136">Order</text>
-
-              <line class="diagram-line" x1="108" y1="136" x2="138" y2="136" marker-end="url(#arrow)"/>
-              <line class="diagram-line" x1="240" y1="136" x2="270" y2="136" marker-end="url(#arrow)"/>
-              <line class="diagram-line" x1="448" y1="136" x2="478" y2="136" marker-end="url(#arrow)"/>
-              <line class="diagram-line" x1="580" y1="136" x2="610" y2="136" marker-end="url(#arrow)"/>
-            </svg>
-          </div>
+        <figure class="flow-diagram">
+          <ol class="flow" aria-label="Order flow: Cart, Checkout, Cost Calculation (fed by the Shipping module), Payment, Order">
+            <li class="flow-step"><span class="flow-box">Cart</span></li>
+            <li class="flow-step"><span class="flow-box">Checkout</span></li>
+            <li class="flow-step flow-step-fed">
+              <span class="flow-box flow-box-external">Shipping module <small>(I<wbr>Shipping<wbr>Option<wbr>Service)</small></span>
+              <span class="flow-feed" aria-hidden="true"></span>
+              <span class="flow-box flow-box-mine">Cost Calculation <small>(my component)</small></span>
+            </li>
+            <li class="flow-step"><span class="flow-box">Payment</span></li>
+            <li class="flow-step"><span class="flow-box">Order</span></li>
+          </ol>
         </figure>
 
-        <h2>A worked example</h2>
+<h2>A worked example</h2>
         <figure class="screenshot">
           <a href="img/pro-rental/cart.png" target="_blank" rel="noopener">
             <img src="img/pro-rental/cart.png" width="1216" height="617" loading="lazy"
