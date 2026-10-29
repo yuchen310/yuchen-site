@@ -699,6 +699,155 @@ code {
   border-top: 7px solid var(--muted);
 }
 
+/* Sub-headings and spacing inside case studies. */
+.case-study h3 {
+  margin: 2rem 0 0.75rem;
+  font-size: 1.125rem;
+}
+
+.case-study h2 + h3 {
+  margin-top: 0;
+}
+
+.case-study .table-scroll + .prose {
+  margin-top: 1.25rem;
+}
+
+.case-study .flowchart-figure + .prose {
+  margin-top: 1.25rem;
+}
+
+/* Vertical flowchart: steps run down the left, and a decision's "No" path branches right. */
+.flowchart-figure {
+  margin: 1.5rem 0 0;
+  padding: 1.25rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-alt);
+}
+
+.flowchart {
+  --node-w: 15rem;
+  --box-h: 3.25rem;
+  --gap: 2rem;
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.fc-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fc-step + .fc-step {
+  margin-top: var(--gap);
+}
+
+.fc-step + .fc-step::before,
+.fc-step + .fc-step::after {
+  content: "";
+  position: absolute;
+}
+
+.fc-step + .fc-step::before {
+  top: calc(-1 * var(--gap) + 2px);
+  left: calc(var(--node-w) / 2 - 1px);
+  height: calc(var(--gap) - 10px);
+  border-left: 2px solid var(--muted);
+}
+
+.fc-step + .fc-step::after {
+  top: -8px;
+  left: calc(var(--node-w) / 2 - 6px);
+  border: 6px solid transparent;
+  border-bottom: 0;
+  border-top: 7px solid var(--muted);
+}
+
+.fc-node {
+  flex: 0 0 var(--node-w);
+}
+
+/* Decisions are pill-shaped with an accent outline. */
+.fc-decision .fc-node {
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+}
+
+.fc-yes {
+  position: absolute;
+  top: 100%;
+  left: calc(var(--node-w) / 2 + 0.6rem);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: var(--gap);
+}
+
+.fc-alt {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* "No" label sits above a dashed arrow pointing at the alternative outcome. */
+.fc-alt-arrow {
+  position: relative;
+  flex: 0 0 3.5rem;
+  padding-bottom: 0.9rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.fc-alt-arrow::before,
+.fc-alt-arrow::after {
+  content: "";
+  position: absolute;
+}
+
+.fc-alt-arrow::before {
+  left: 4px;
+  right: 8px;
+  bottom: calc(0.45rem - 1px);
+  border-top: 2px dashed var(--muted);
+}
+
+.fc-alt-arrow::after {
+  right: 1px;
+  bottom: calc(0.45rem - 6px);
+  border: 6px solid transparent;
+  border-right: 0;
+  border-left: 7px solid var(--muted);
+}
+
+.fc-alt-node {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 15rem;
+  border-style: dashed;
+  background: transparent;
+}
+
+@media (max-width: 40rem) {
+  .flowchart {
+    --node-w: 52%;
+  }
+
+  .fc-alt-arrow {
+    flex-basis: 2.25rem;
+  }
+
+  .fc-alt-node {
+    font-size: 0.75rem;
+  }
+}
+
 /* Screenshot captions, and pairs shown side by side on wide screens. */
 .screenshot figcaption {
   margin-top: 0.5rem;

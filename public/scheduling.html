@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Train Station Staff Scheduling System | Lim Yu Chen</title>
+  <meta name="description" content="Case study: Figma wireframes and use cases for a train station staff scheduling system that enforces rostering rules.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Apply the theme before first paint to avoid a flash of the wrong colours.
+    (function () {
+      var stored = null;
+      try { stored = sessionStorage.getItem("theme"); } catch (e) {}
+      var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", dark);
+    })();
+  </script>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="nav-name" href="index.html#hero">Lim Yu Chen</a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#repos">Repos</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="case-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#projects">← Back to portfolio</a>
+        <h1>Train Station Staff Scheduling System</h1>
+        <p class="case-meta">Course project · INF2001 Introduction to Software Engineering, SIT · 2025</p>
+
+        <dl class="at-a-glance" aria-label="At a glance">
+          <div>
+            <dt>Role</dt>
+            <dd>UI designer and use case author</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>6 (equal contribution)</dd>
+          </div>
+          <div>
+            <dt>My part</dt>
+            <dd>Almost all Figma wireframes; use cases UC-08 and UC-10</dd>
+          </div>
+          <div>
+            <dt>Tools</dt>
+            <dd>Figma, UML</dd>
+          </div>
+          <div>
+            <dt>Link</dt>
+            <dd><a href="https://www.figma.com/design/fdSWLuWIiKrwcCBHg0YOWa/ISE-Train-and-Employee-management" target="_blank" rel="noopener noreferrer">View Figma wireframes</a></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="case-study">
+      <div class="container">
+        <h2>The problem</h2>
+        <p class="prose">Train station managers built weekly staff rosters by hand, juggling availability, preferences and strict operating rules. The system lets managers allocate train services to staff each week, lets staff submit availability and job preferences, and lets IT administrators manage user accounts, with the rules enforced by the system instead of by memory.</p>
+
+        <h2>My part: the wireframes</h2>
+        <p class="prose">I designed almost all of the Figma wireframes, covering the three roles (manager, staff and IT administrator), so the team could see every use case as a screen before any design decisions were locked in. The full set is in the Figma file linked above.</p>
+
+        <figure class="screenshot">
+          <a href="img/scheduling/staff-welcome.png" target="_blank" rel="noopener">
+            <img src="img/scheduling/staff-welcome.png" width="1920" height="1080" loading="lazy"
+              alt="Wireframe of the staff welcome screen for the Train Company Workload Management System, headed 'Welcome Staff', with three large buttons: My Schedule, Manage Availability and Job Preference.">
+          </a>
+          <figcaption>Staff welcome screen: schedule, availability and job preferences in one place.</figcaption>
+        </figure>
+
+        <h2>The rules the system enforces</h2>
+        <div class="table-scroll" role="region" aria-label="Scheduling rules" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Rule</th>
+                <th scope="col">Requirement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Availability deadline</td>
+                <td>Availability for a week must be submitted by 23:59 on the preceding Wednesday</td>
+              </tr>
+              <tr>
+                <td>Conductor</td>
+                <td>Exactly one train conductor per train service</td>
+              </tr>
+              <tr>
+                <td>Support staff</td>
+                <td>One assistant conductor and one cleaner for every two passenger carriages</td>
+              </tr>
+              <tr>
+                <td>Engine driver</td>
+                <td>No driver operates a locomotive for more than two consecutive hours</td>
+              </tr>
+              <tr>
+                <td>No double-booking</td>
+                <td>No staff member is assigned to overlapping jobs</td>
+              </tr>
+              <tr>
+                <td>Modification lock</td>
+                <td>No changes to an assignment within 24 hours of its start</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="prose">Rules only help if users can see them. In the wireframes, a rule that blocks an action shows up as a clear message at the moment it applies:</p>
+
+        <figure class="screenshot">
+          <a href="img/scheduling/staff-availability-delete.png" target="_blank" rel="noopener">
+            <img src="img/scheduling/staff-availability-delete.png" width="1920" height="1080" loading="lazy"
+              alt="Wireframe of the staff Manage Availability screen listing availability by week, with Monday and Saturday from 06:00 to 22:00 in the first week and delete icons beside them. A red message in the corner reads 'The availability is in the past'.">
+          </a>
+          <figcaption>Managing availability: the system blocks deleting availability that is already in the past.</figcaption>
+        </figure>
+
+        <h2>My use cases</h2>
+        <h3>UC-08: Reject assigned job (Staff)</h3>
+        <p class="prose">A staff member views their current and upcoming assignments and can reject a future one, but must give a reason, and the manager is notified.</p>
+
+        <figure class="flowchart-figure">
+          <ol class="flowchart" aria-label="UC-08 flow">
+            <li class="fc-step"><span class="flow-box fc-node">View assignments</span></li>
+            <li class="fc-step"><span class="flow-box fc-node">Select a job</span></li>
+            <li class="fc-step fc-decision">
+              <span class="flow-box fc-node">Is it in a future week?</span>
+              <span class="fc-alt">
+                <span class="fc-alt-arrow">No</span>
+                <span class="flow-box fc-alt-node">Jobs in the active week cannot be rejected <small>↩ back to list</small></span>
+              </span>
+              <span class="fc-yes">Yes</span>
+            </li>
+            <li class="fc-step"><span class="flow-box fc-node">Warning: manager will be notified</span></li>
+            <li class="fc-step"><span class="flow-box fc-node">Enter reason</span></li>
+            <li class="fc-step fc-decision">
+              <span class="flow-box fc-node">Reason provided?</span>
+              <span class="fc-alt">
+                <span class="fc-alt-arrow">No</span>
+                <span class="flow-box fc-alt-node">Prompt for reason <small>↩ back to enter reason</small></span>
+              </span>
+              <span class="fc-yes">Yes</span>
+            </li>
+            <li class="fc-step"><span class="flow-box fc-node">Save rejection</span></li>
+            <li class="fc-step"><span class="flow-box fc-node">Notify manager</span></li>
+            <li class="fc-step"><span class="flow-box fc-node">Update job list</span></li>
+          </ol>
+        </figure>
+
+        <p class="prose">The two alternative paths matter most: they protect the current week's roster from last-minute changes and make sure managers always know why a job was turned down.</p>
+
+        <h3>UC-10: Update user details (IT Administrator)</h3>
+        <p class="prose">An IT administrator edits an existing account's name, email or role. Changes are validated before saving, and changing a role changes what that person can access, since the system gives Staff, Manager and IT Administrator roles different permissions.</p>
+
+        <h2>What the team built around this</h2>
+        <ul class="prose-list">
+          <li>A three-layer architecture (presentation, business, persistence), with each layer talking only to the next.</li>
+          <li>The Factory pattern, so new user types can be added without changing existing code.</li>
+          <li>The Strategy pattern, so managers can switch how staff are ranked for a job (for example, by fewest hours or by route preference).</li>
+          <li>Black-box testing with a cause-effect table for adding availability, and white-box testing with a control flow graph and basis-path test cases for date validation, the same past-date rule shown in the availability wireframe.</li>
+        </ul>
+
+        <h2>What I learned</h2>
+        <ul class="prose-list">
+          <li>Wireframes are a requirements tool, not just a design step. Drawing each use case as a screen exposed missing details, such as where a rejection reason is entered and what a user sees when there are no assignments.</li>
+          <li>Alternative scenarios are where the business rules live. Most of UC-08's value is in the cases that stop a rejection, and each one needs a message the user can understand.</li>
+        </ul>
+
+        <p class="case-footer-link"><a class="back-link" href="index.html#projects">← Back to portfolio</a></p>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>↑ Top</button>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> Lim Yu Chen</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
