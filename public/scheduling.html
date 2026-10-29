@@ -69,7 +69,7 @@
         <p class="prose">Train station managers built weekly staff rosters by hand, juggling availability, preferences and strict operating rules. The system lets managers allocate train services to staff each week, lets staff submit availability and job preferences, and lets IT administrators manage user accounts, with the rules enforced by the system instead of by memory.</p>
 
         <h2>My part: the wireframes</h2>
-        <p class="prose">I designed almost all of the Figma wireframes, covering the three roles (manager, staff and IT administrator), so the team could see every use case as a screen before any design decisions were locked in. The full set is in the Figma file linked above.</p>
+        <p class="prose">I designed almost all of the Figma wireframes, covering the three roles (manager, staff and IT administrator). I drew a screen for every path through a use case, including errors and empty states, not just the main flow, so the team could check each requirement against something concrete. The full set is in the Figma file linked above.</p>
 
         <figure class="screenshot">
           <a href="img/scheduling/staff-welcome.png" target="_blank" rel="noopener">
@@ -127,8 +127,7 @@
           <figcaption>Managing availability: the system blocks deleting availability that is already in the past.</figcaption>
         </figure>
 
-        <h2>My use cases</h2>
-        <h3>UC-08: Reject assigned job (Staff)</h3>
+        <h2>UC-08: Reject assigned job (Staff)</h2>
         <p class="prose">A staff member views their current and upcoming assignments and can reject a future one, but must give a reason, and the manager is notified.</p>
 
         <figure class="flowchart-figure">
@@ -159,10 +158,84 @@
           </ol>
         </figure>
 
-        <p class="prose">The two alternative paths matter most: they protect the current week's roster from last-minute changes and make sure managers always know why a job was turned down.</p>
+        <h3>Main flow</h3>
+        <div class="gallery">
+          <figure class="screenshot">
+            <a href="img/scheduling/view-schedule.png" target="_blank" rel="noopener">
+              <img src="img/scheduling/view-schedule.png" width="1920" height="1080" loading="lazy"
+                alt="Wireframe of the staff My Schedule screen with a Current Week Schedule table and an Upcoming Week Schedule table. Each row shows a date, shift, time and a Reject button; the Reject buttons for past days in the current week are faded.">
+            </a>
+            <figcaption>1. The staff member's schedule: current week and upcoming week, with a Reject button per job.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/scheduling/reject-confirm.png" target="_blank" rel="noopener">
+              <img src="img/scheduling/reject-confirm.png" width="1920" height="1080" loading="lazy"
+                alt="Wireframe of a Confirm Rejection dialog over the schedule. A warning says rejecting the job will immediately notify the manager and may affect scheduling, and a Reason of Rejection box contains 'Personal Reason', with Cancel and Reject buttons.">
+            </a>
+            <figcaption>2. Confirming a rejection: a warning that the manager will be notified, and a required reason.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/scheduling/reject-done.png" target="_blank" rel="noopener">
+              <img src="img/scheduling/reject-done.png" width="1920" height="1080" loading="lazy"
+                alt="Wireframe of the schedule after a rejection. In the upcoming week, the 3rd November morning shift's Reject button is faded and the Reason column shows 'Personal appointment'.">
+            </a>
+            <figcaption>3. After rejecting: the job is marked rejected and the reason is recorded.</figcaption>
+          </figure>
+        </div>
 
-        <h3>UC-10: Update user details (IT Administrator)</h3>
-        <p class="prose">An IT administrator edits an existing account's name, email or role. Changes are validated before saving, and changing a role changes what that person can access, since the system gives Staff, Manager and IT Administrator roles different permissions.</p>
+        <h3>Alternative paths</h3>
+        <div class="gallery">
+          <figure class="screenshot">
+            <a href="img/scheduling/reject-active-week.png" target="_blank" rel="noopener">
+              <img src="img/scheduling/reject-active-week.png" width="1920" height="1080" loading="lazy"
+                alt="Wireframe of the schedule with a red message at the top right reading 'Job in the active week cannot be rejected'.">
+            </a>
+            <figcaption>Blocked: jobs in the current week cannot be rejected.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/scheduling/reject-reason-empty.png" target="_blank" rel="noopener">
+              <img src="img/scheduling/reject-reason-empty.png" width="1920" height="1080" loading="lazy"
+                alt="Wireframe of the Confirm Rejection dialog with an empty reason box, red text reading 'Please provide a rejection reason' below it, and the Reject button greyed out.">
+            </a>
+            <figcaption>Blocked: a rejection cannot be submitted without a reason.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/scheduling/schedule-empty.png" target="_blank" rel="noopener">
+              <img src="img/scheduling/schedule-empty.png" width="1920" height="1080" loading="lazy"
+                alt="Wireframe of the staff My Schedule screen where both the current week and upcoming week tables show 'No jobs assigned'.">
+            </a>
+            <figcaption>Empty state: what a staff member sees when no jobs are assigned.</figcaption>
+          </figure>
+        </div>
+
+        <p class="prose">The alternative paths matter most: they protect the current week's roster from last-minute changes, make sure managers always know why a job was turned down, and make sure the screen still makes sense when there is nothing to show.</p>
+
+        <h2>UC-10: Update user details (IT Administrator)</h2>
+        <p class="prose">An IT administrator edits an existing account's name, email, role, department or phone number. All fields are required, and the system rejects an email address that already belongs to another account. Changing a role changes what that person can access, since the system gives Staff, Manager and IT Administrator roles different permissions.</p>
+
+        <div class="gallery">
+          <figure class="screenshot">
+            <a href="img/scheduling/admin-users.png" target="_blank" rel="noopener">
+              <img src="img/scheduling/admin-users.png" width="1920" height="1080" loading="lazy"
+                alt="Wireframe of the IT Admin Portal's Manage Users screen: a table of three users with name, email, role, department and phone columns, edit and delete icons for each row, and an Add New User button.">
+            </a>
+            <figcaption>The user list, with edit and delete actions for each account.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/scheduling/admin-edit-user.png" target="_blank" rel="noopener">
+              <img src="img/scheduling/admin-edit-user.png" width="1920" height="1080" loading="lazy"
+                alt="Wireframe of the Edit User form with Name, Email, Role, Department and Phone fields, each marked with a red asterisk as required, and Cancel and Save Changes buttons.">
+            </a>
+            <figcaption>Editing a user: every field is required.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/scheduling/admin-duplicate-email.png" target="_blank" rel="noopener">
+              <img src="img/scheduling/admin-duplicate-email.png" width="1920" height="1080" loading="lazy"
+                alt="Wireframe of the Edit User form where the email has been changed to another user's address, with a red message at the top right reading 'Email already exists'.">
+            </a>
+            <figcaption>Blocked: the new email address already belongs to another user.</figcaption>
+          </figure>
+        </div>
 
         <h2>What the team built around this</h2>
         <ul class="prose-list">
@@ -174,8 +247,9 @@
 
         <h2>What I learned</h2>
         <ul class="prose-list">
-          <li>Wireframes are a requirements tool, not just a design step. Drawing each use case as a screen exposed missing details, such as where a rejection reason is entered and what a user sees when there are no assignments.</li>
-          <li>Alternative scenarios are where the business rules live. Most of UC-08's value is in the cases that stop a rejection, and each one needs a message the user can understand.</li>
+          <li>Wireframes are a requirements tool, not just a design step. Drawing every path as a screen exposed details the written use cases left open, such as what an empty schedule looks like and where an error message appears.</li>
+          <li>Alternative scenarios are where the business rules live. Most of UC-08's screens are about stopping a rejection, and each one needs a message the user can understand.</li>
+          <li>Designing error states is the first step of testing them. Each blocked-action screen maps directly to a test case: try to reject a current-week job, submit without a reason, reuse an existing email.</li>
         </ul>
 
         <p class="case-footer-link"><a class="back-link" href="index.html#projects">← Back to portfolio</a></p>
