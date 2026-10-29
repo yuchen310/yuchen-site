@@ -276,6 +276,22 @@ section:nth-of-type(even) {
   color: var(--muted);
 }
 
+/* Topic lists: tighter spacing with a dot between items. */
+ul.card-meta {
+  gap: 0.25rem 0.5rem;
+}
+
+ul.card-meta li + li::before {
+  content: "·";
+  margin-right: 0.5rem;
+}
+
+.card .card-context {
+  flex-grow: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.8125rem;
+}
+
 .status {
   color: var(--muted);
   margin: 0;
