@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dynamic Security Testing of a Peer Web App | Lim Yu Chen</title>
+  <meta name="description" content="Case study: authenticated OWASP ZAP scanning of another team's live web app behind two-factor login, with triage of the scanner's findings.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Apply the theme before first paint to avoid a flash of the wrong colours.
+    (function () {
+      var stored = null;
+      try { stored = sessionStorage.getItem("theme"); } catch (e) {}
+      var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", dark);
+    })();
+  </script>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="nav-name" href="index.html#hero">Lim Yu Chen</a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#repos">Repos</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="case-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#projects">← Back to portfolio</a>
+        <h1>Dynamic Security Testing of a Peer Web App</h1>
+        <p class="case-meta">Course project · ICT2216 Secure Software Development, SIT · July 2026 · QA phase</p>
+
+        <dl class="at-a-glance" aria-label="At a glance">
+          <div>
+            <dt>Role</dt>
+            <dd>QA tester, OWASP ZAP (automated and authenticated scanning)</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>QA pair, with a teammate testing manually in Burp Suite</dd>
+          </div>
+          <div>
+            <dt>Target</dt>
+            <dd>Another team's live résumé-builder web app (React frontend, Flask backend, Nginx, two-factor login)</dd>
+          </div>
+          <div>
+            <dt>Tools</dt>
+            <dd>OWASP ZAP 2.17</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="case-study">
+      <div class="container">
+        <h2>The context</h2>
+        <p class="prose">Earlier in the module, my team built our own app, <a href="safesplit.html">Safesplit</a>. In the final phase, each team then acted as the independent QA team for another team's application. Our QA work had three parts: a manual source code review, static analysis, and dynamic testing of the live deployed app. Dynamic testing had a specific job: to check whether the issues found by reading the code actually showed up in the running system, and to find anything the code review could not see.</p>
+
+        <figure class="flow-diagram">
+          <ol class="flow flow-top" aria-label="QA work: source code review, then static analysis, then dynamic testing of the live app, split into OWASP ZAP automated and authenticated scanning (my part) and Burp Suite manual testing (teammate)">
+            <li class="flow-step"><span class="flow-box">Source code review</span></li>
+            <li class="flow-step"><span class="flow-box">Static analysis</span></li>
+            <li class="flow-step flow-step-wide">
+              <span class="flow-box">Dynamic testing <small>(live app)</small></span>
+              <span class="flow-branches">
+                <span class="flow-box flow-box-mine">OWASP ZAP <small>automated + authenticated scanning (my part)</small></span>
+                <span class="flow-box">Burp Suite <small>manual testing (teammate)</small></span>
+              </span>
+            </li>
+          </ol>
+        </figure>
+
+        <h2>My part: scanning behind two-factor login</h2>
+        <p class="prose">I first ran an unauthenticated scan to get a baseline. Most of the application, though, sits behind a login that requires a password and then a time-based one-time code. ZAP cannot complete that second step on its own, so an automated scan would only ever see the login page.</p>
+        <p class="prose">To reach the authenticated parts of the app, I completed the login by hand, captured the session cookie that the server set after the two-factor step, and configured ZAP's Replacer to inject that cookie into every request it sent. With that in place, the spider and active scanner could crawl the dashboard, profile and API routes as a logged-in user.</p>
+
+        <h2>What I found</h2>
+        <p class="prose">I confirmed six issues, all in security headers and configuration:</p>
+        <div class="table-scroll" role="region" aria-label="Confirmed findings" tabindex="0">
+          <table class="checklist">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Finding</th>
+                <th scope="col">Severity</th>
+                <th scope="col">Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>D8</td>
+                <td>Content Security Policy incomplete and inconsistent</td>
+                <td>Medium</td>
+                <td>No frame-ancestors or form-action directives, inline styles allowed, and no policy at all on API responses</td>
+              </tr>
+              <tr>
+                <td>D9</td>
+                <td>Missing anti-clickjacking header</td>
+                <td>Medium</td>
+                <td>Nothing stops another site from loading the app inside a hidden frame</td>
+              </tr>
+              <tr>
+                <td>D10</td>
+                <td>CSRF cookie readable by JavaScript</td>
+                <td>Low</td>
+                <td>Likely intentional (double-submit CSRF pattern); flagged for the team to confirm</td>
+              </tr>
+              <tr>
+                <td>D11</td>
+                <td>Duplicate HSTS headers</td>
+                <td>Low</td>
+                <td>Browsers only honour the first, so the policy may be applied inconsistently</td>
+              </tr>
+              <tr>
+                <td>D12</td>
+                <td>Missing X-Content-Type-Options</td>
+                <td>Low</td>
+                <td>Browsers may guess content types, including on error pages</td>
+              </tr>
+              <tr>
+                <td>D13</td>
+                <td>Server version disclosed</td>
+                <td>Low</td>
+                <td>The exact Nginx version gives attackers a starting point for known vulnerabilities</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="screenshot-pair">
+          <figure class="screenshot">
+            <a href="img/dast/zap-csp.png" target="_blank" rel="noopener">
+              <img src="img/dast/zap-csp.png" width="1411" height="800" loading="lazy"
+                alt="OWASP ZAP with the alert 'CSP: Failure to Define Directive with No Fallback' selected, rated Medium risk. The response headers show a Content-Security-Policy with default-src, script-src, style-src including 'unsafe-inline', img-src and frame-src, and ZAP notes that frame-ancestors and form-action are missing.">
+            </a>
+            <figcaption>D8: ZAP flagging CSP directives with no fallback.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/dast/zap-clickjacking.png" target="_blank" rel="noopener">
+              <img src="img/dast/zap-clickjacking.png" width="1295" height="771" loading="lazy"
+                alt="OWASP ZAP with the alert 'Missing Anti-clickjacking Header' selected, rated Medium risk, on four URLs. The description says responses should include a Content-Security-Policy frame-ancestors directive or an X-Frame-Options header.">
+            </a>
+            <figcaption>D9: Missing anti-clickjacking header.</figcaption>
+          </figure>
+        </div>
+
+        <h2>Filtering out noise</h2>
+        <p class="prose">Scanner output is not a list of findings until it has been checked. Two examples from this test:</p>
+        <ul class="prose-list">
+          <li>ZAP raised a "Strict-Transport-Security Header Not Set" alert, but every instance resolved to background browser traffic to Google services, not the target application. I excluded it rather than reporting a false positive.</li>
+          <li>ZAP rated the CSRF cookie without HttpOnly as an issue. Looking at how the app's two cookies were set, the session cookie was correctly hardened and the CSRF cookie matched a standard pattern where JavaScript is meant to read it. I reported it as Low, with a note asking the developers to confirm the design rather than treating it as a vulnerability.</li>
+        </ul>
+
+        <figure class="screenshot">
+          <a href="img/dast/zap-cookie.png" target="_blank" rel="noopener">
+            <img src="img/dast/zap-cookie.png" width="1296" height="767" loading="lazy"
+              alt="OWASP ZAP showing the response to the two-factor verification request. Two Set-Cookie headers are visible: the access token cookie with Secure, HttpOnly and SameSite=Strict, and the CSRF token cookie with Secure and SameSite=Strict but no HttpOnly. The selected alert is 'Cookie No HttpOnly Flag', rated Low, for the CSRF cookie.">
+          </a>
+          <figcaption>D10: The two cookies set after login. The session cookie is HttpOnly; the CSRF cookie is not.</figcaption>
+        </figure>
+
+        <figure class="screenshot">
+          <a href="img/dast/zap-server-version.png" target="_blank" rel="noopener">
+            <img src="img/dast/zap-server-version.png" width="1271" height="760" loading="lazy"
+              alt="OWASP ZAP with the alert 'Server Leaks Version Information via Server HTTP Response Header' selected. The highlighted response header reads Server: nginx/1.31.2.">
+          </a>
+          <figcaption>D13: Server header revealing the exact Nginx version.</figcaption>
+        </figure>
+
+        <h2>The team result</h2>
+        <p class="prose">Together with my teammate's manual Burp Suite testing, the QA pair confirmed 9 issues, ruled out 3 that the code review had predicted, and recorded 1 critical issue as blocked rather than passed, because testing it needed an admin account we did not have. The most serious confirmed issue, found through manual testing, was that rapid failed logins crashed the backend.</p>
+
+        <h2>What I learned</h2>
+        <ul class="prose-list">
+          <li>Automated scanners need set-up to be useful. Without the authenticated session, most of the app would have gone untested and the report would have looked cleaner than the app really was.</li>
+          <li>Every alert needs triage. Excluding the off-target HSTS alert and downgrading the CSRF cookie both required reading the evidence, not just the alert title.</li>
+          <li>Header issues are cheap to fix and easy to miss. Most of my findings could be fixed with a few lines of web server configuration, which is exactly why they are worth catching before release.</li>
+          <li>Automated and manual testing find different things. ZAP covered configuration across the whole app; my teammate's manual testing found the logic and availability issues.</li>
+        </ul>
+
+        <p class="case-footer-link"><a class="back-link" href="index.html#projects">← Back to portfolio</a></p>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>↑ Top</button>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> Lim Yu Chen</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
