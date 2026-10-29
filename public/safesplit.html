@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Safesplit – Secure Expense-Splitting App | Lim Yu Chen</title>
+  <meta name="description" content="Case study: Safesplit, a group expense-splitting web app built by software engineering and information security students, with security designed in from the requirements stage.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Apply the theme before first paint to avoid a flash of the wrong colours.
+    (function () {
+      var stored = null;
+      try { stored = sessionStorage.getItem("theme"); } catch (e) {}
+      var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", dark);
+    })();
+  </script>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="nav-name" href="index.html#hero">Lim Yu Chen</a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#repos">Repos</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="case-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#projects">← Back to portfolio</a>
+        <h1>Safesplit – Secure Expense-Splitting App</h1>
+        <p class="case-meta">Course project · ICT2216 Secure Software Development, SIT · May–July 2026 · Development phase</p>
+
+        <dl class="at-a-glance" aria-label="At a glance">
+          <div>
+            <dt>Role</dt>
+            <dd>Software engineering developer</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>7 (software engineering and information security students)</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>React, Node.js with Express, PostgreSQL, Docker Compose, Nginx, AWS EC2</dd>
+          </div>
+          <div>
+            <dt>Pipeline</dt>
+            <dd>GitHub Actions (unit tests → Selenium tests → deploy)</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="case-study">
+      <div class="container">
+        <h2>The app</h2>
+        <p class="prose">Splitting shared costs among friends, flatmates or travel groups usually means a spreadsheet or a chat thread nobody trusts. Safesplit lets users create groups, log expenses split equally, by percentage or by custom amounts, and see a live summary of who owes whom. Debts are settled outside the app (cash, PayNow, bank transfer) and then recorded, with the other person confirming receipt, so both sides agree on every balance. A full history of expenses and settlements keeps the group transparent, and expenses can be logged in different currencies.</p>
+
+        <h2>How the team worked</h2>
+        <p class="prose">The module paired software engineering students, who built the application, with information security students, who led the security analysis. Security was designed in from the start: the team derived security requirements from the functional ones, paired each use case with a misuse case, ranked risks, and built a STRIDE threat model before implementation began.</p>
+
+        <!-- TODO: add a "My part" section here: the pages, features or API endpoints built, and anything solved along the way. -->
+
+        <h2>Architecture</h2>
+        <figure class="flow-diagram">
+          <ol class="flow" aria-label="Request path: Browser, Nginx, React frontend and Express API, PostgreSQL">
+            <li class="flow-step"><span class="flow-box">Browser</span></li>
+            <li class="flow-step"><span class="flow-box">Nginx <small>(HTTPS, TLS 1.2/1.3)</small></span></li>
+            <li class="flow-step"><span class="flow-box">React frontend + Express API</span></li>
+            <li class="flow-step"><span class="flow-box">PostgreSQL</span></li>
+          </ol>
+          <figcaption class="flow-note">Only Nginx is exposed to the internet; the API and database sit on a private Docker network.</figcaption>
+        </figure>
+
+        <p class="prose">Key security choices in the implementation:</p>
+        <ul class="prose-list">
+          <li>Passwords hashed with bcrypt (cost factor 12), each with its own random salt.</li>
+          <li>Sessions use signed tokens backed by a server-side session record, so a session can be revoked immediately, for example on logout.</li>
+          <li>All input validated against schemas, and all database queries parameterised.</li>
+          <li>Login and other sensitive endpoints are rate-limited.</li>
+          <li>The database has no public port; only the web server accepts outside connections.</li>
+        </ul>
+
+        <h2>The pipeline</h2>
+        <p class="prose">Every push runs three jobs in order, and each only runs if the previous one passes:</p>
+        <figure class="flow-diagram">
+          <ol class="flow" aria-label="CI pipeline: Unit tests, Selenium browser tests, Deploy to AWS">
+            <li class="flow-step"><span class="flow-box">Unit tests</span></li>
+            <li class="flow-step"><span class="flow-box">Selenium browser tests <small>(full stack in Docker)</small></span></li>
+            <li class="flow-step"><span class="flow-box">Deploy to AWS</span></li>
+          </ol>
+        </figure>
+        <p class="prose">A separate workflow runs OWASP Dependency-Check against third-party packages.</p>
+
+        <h2>Planned vs built</h2>
+        <p class="prose">The design called for a production-style AWS setup: load balancer, managed database, separate session store and web application firewall. The course deployment ran on a single virtual machine instead, so the team mapped each planned component to an equivalent control and documented the gaps:</p>
+        <div class="table-scroll" role="region" aria-label="Planned versus built infrastructure" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Planned</th>
+                <th scope="col">Built</th>
+                <th scope="col">Trade-off</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Load balancer with managed certificate</td>
+                <td>Nginx on the VM with a self-signed certificate</td>
+                <td>Same encryption; only certificate trust is reduced</td>
+              </tr>
+              <tr>
+                <td>Managed database (RDS)</td>
+                <td>PostgreSQL container with no public port</td>
+                <td>Same isolation from the internet</td>
+              </tr>
+              <tr>
+                <td>Separate session store</td>
+                <td>Sessions table in PostgreSQL</td>
+                <td>Same server-side revocation, one fewer service</td>
+              </tr>
+              <tr>
+                <td>Web application firewall</td>
+                <td>Not built</td>
+                <td>Input validation covers the application layer; recorded as residual risk</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>What I learned</h2>
+        <ul class="prose-list">
+          <li>Building alongside security specialists changes how you write features: every endpoint started with "who is allowed to call this, and what if they send something unexpected?"</li>
+          <li>A pipeline that blocks deployment on failing tests makes the team trust the live site.</li>
+          <li>When the real environment differs from the design, the honest move is to document what each change costs, not to quietly drop the requirement.</li>
+        </ul>
+
+        <p class="case-footer-link"><a class="back-link" href="index.html#projects">← Back to portfolio</a></p>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>↑ Top</button>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> Lim Yu Chen</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
