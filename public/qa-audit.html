@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QA Audit of a Requirements Engineering Process | Lim Yu Chen</title>
+  <meta name="description" content="Case study: an independent QA audit of the requirements engineering process behind a university hostel management system's SRS.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Apply the theme before first paint to avoid a flash of the wrong colours.
+    (function () {
+      var stored = null;
+      try { stored = sessionStorage.getItem("theme"); } catch (e) {}
+      var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", dark);
+    })();
+  </script>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="nav-name" href="index.html#hero">Lim Yu Chen</a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#repos">Repos</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="case-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#projects">← Back to portfolio</a>
+        <h1>QA Audit of a Requirements Engineering Process</h1>
+        <p class="case-meta">Course project · ICT2113, Singapore Institute of Technology · March 2026 · Individual QA component</p>
+        <ul class="card-meta" aria-label="Topics">
+          <li>Quality Assurance</li>
+          <li>Requirements Engineering</li>
+          <li>IEEE SRS</li>
+          <li>Process Audit</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-study">
+      <div class="container">
+        <h2>The problem</h2>
+        <p class="prose">A project team produced a Software Requirements Specification (SRS) for a university hostel management system. Before it could be accepted as the baseline for development, someone had to confirm it was produced properly. My role was to act as the independent QA auditor: not to check the document itself, but to audit the process the team used to create it.</p>
+
+        <h2>QA vs QC</h2>
+        <p class="prose">Quality Control inspects the product for defects: typos, missing requirements, contradictions in the SRS. Quality Assurance asks a different question: was the defined process actually followed, by the right people, in the right order, and is there evidence to prove it? A document can look correct while the process behind it is unverifiable. QA is what makes the result trustworthy.</p>
+
+        <h2>My approach</h2>
+        <p class="prose">I planned the audit as seven steps:</p>
+        <ol class="prose-list">
+          <li>Establish the repository baseline: confirm which artefacts and versions are under audit (project specification, analysis report, SRS).</li>
+          <li>Audit the QC execution plan: was there a defined scope, objectives, roles, method and checklist before validation started?</li>
+          <li>Audit the analysis phase: was the Breakdown → Clarify → Interpret → Categorise sequence followed, were issues recorded with identifiers, and were stakeholder clarifications documented?</li>
+          <li>Audit the specification phase: is the SRS traceable to the analysis, does it follow the IEEE structure, and does it include a traceability matrix and change-control procedure?</li>
+          <li>Audit the validation phase: were findings classified, located and evidenced, and was the QC report signed off?</li>
+          <li>Meet the authoring team to confirm the sequence of activities and identify deviations.</li>
+          <li>Meet the QC team to confirm their independence from the authors and that they followed their own plan.</li>
+        </ol>
+
+        <h2>The checklist</h2>
+        <p class="prose">I designed 23 checks across the three phases (8 analysis, 8 specification, 7 validation). Each check records a status, a remark and the evidence it is based on. A sample:</p>
+        <div class="table-scroll" role="region" aria-label="Sample checklist" tabindex="0">
+          <table class="checklist">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Check</th>
+                <th scope="col">Result</th>
+                <th scope="col">Why</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>APC-03</td>
+                <td>Was a structured checklist used to review the project specification for ambiguity, omissions and contradictions?</td>
+                <td><span class="result result-pass">Pass</span></td>
+                <td>Documented in the analysis report.</td>
+              </tr>
+              <tr>
+                <td>APC-05</td>
+                <td>Were requirements classified as revised, retained or dropped, with rationale?</td>
+                <td><span class="result result-fail">Fail</span></td>
+                <td>Requirements were rewritten, but never classified.</td>
+              </tr>
+              <tr>
+                <td>APC-08</td>
+                <td>Is there version-control evidence for the artefacts?</td>
+                <td><span class="result result-fail">Fail</span></td>
+                <td>The report claims a repository, but no commit history was shown.</td>
+              </tr>
+              <tr>
+                <td>SPC-07</td>
+                <td>Is a quality model applied with measurable non-functional requirements?</td>
+                <td><span class="result result-pass">Pass</span></td>
+                <td>McCall's model used, NFRs mapped to quality factors.</td>
+              </tr>
+              <tr>
+                <td>VPC-05</td>
+                <td>Were QC findings resolved before sign-off?</td>
+                <td><span class="result result-fail">Fail</span></td>
+                <td>Findings listed, but no closure records.</td>
+              </tr>
+              <tr>
+                <td>VPC-07</td>
+                <td>Did the customer sign off the SRS?</td>
+                <td><span class="result result-fail">Fail</span></td>
+                <td>The customer signature field was blank.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Findings</h2>
+        <p class="prose">9 of 23 checks failed: 2 in analysis, 4 in specification and 3 in validation. The pattern mattered more than the count. Most failures were missing evidence rather than skipped work: the activities had been carried out, but the audit trail could not prove it. I rated two issues as blockers to baselining the SRS: the missing customer sign-off, and the absence of QC closure records. Without them, there is no agreed contract and no proof that known defects were dealt with.</p>
+
+        <h2>What I learned</h2>
+        <ul class="prose-list">
+          <li>Absence of evidence is a finding. If a step leaves no artefact, an auditor cannot distinguish "done" from "not done".</li>
+          <li>A process is only auditable if it is designed to leave a trail: versions, review records, sign-offs and closure notes.</li>
+          <li>Every check needs a stated evidence source. Writing down why something passed was as important as recording why something failed.</li>
+          <li>QA findings are about risk to the project, not blame. Prioritising the two blockers was more useful to the team than a flat list of nine failures.</li>
+        </ul>
+        <p class="prose">These lessons led directly to how I set up this portfolio: every change goes through a pull request, is checked by an independent test suite, and leaves a reviewable record.</p>
+
+        <h2>Tools</h2>
+        <p class="prose">I used AI tools as an advisory cross-check, to stress-test my checklist and flag potential gaps. Every finding in the audit was verified manually against the source documents before it was included.</p>
+
+        <p class="case-footer-link"><a class="back-link" href="index.html#projects">← Back to portfolio</a></p>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>↑ Top</button>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> Lim Yu Chen</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -6,6 +6,8 @@
   --border: #e2e5ea;
   --accent: #1f5fbf;
   --accent-text: #ffffff;
+  --pass: #1a7f37;
+  --fail: #b42318;
   --radius: 10px;
   --max: 960px;
   color-scheme: light;
@@ -19,6 +21,8 @@ body.dark {
   --border: #2a3039;
   --accent: #6ea8ff;
   --accent-text: #0b1220;
+  --pass: #6fdc8c;
+  --fail: #ff8a80;
   color-scheme: dark;
 }
 
@@ -284,6 +288,129 @@ ul.card-meta {
 ul.card-meta li + li::before {
   content: "·";
   margin-right: 0.5rem;
+}
+
+.card-link {
+  align-self: flex-start;
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* Case study pages */
+.case-hero {
+  padding-block: 3rem 2.5rem;
+}
+
+.case-hero h1 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  letter-spacing: -0.01em;
+  max-width: 30ch;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.case-meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+section.case-study {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.case-study h2 {
+  margin: 2.75rem 0 1rem;
+}
+
+.case-study h2:first-child {
+  margin-top: 0;
+}
+
+.case-study .prose + .prose,
+.case-study .prose-list + .prose {
+  margin-top: 1rem;
+}
+
+.prose-list {
+  max-width: 65ch;
+  margin: 1rem 0 0;
+  padding-left: 1.5rem;
+}
+
+ul.prose-list {
+  list-style: disc;
+}
+
+.prose-list li + li {
+  margin-top: 0.5rem;
+}
+
+.case-footer-link {
+  margin: 3rem 0 0;
+}
+
+/* Wide tables scroll inside their own box so the page never scrolls sideways. */
+.table-scroll {
+  margin-top: 1.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.checklist {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.checklist th,
+.checklist td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.checklist th {
+  background: var(--bg-alt);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.checklist tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.checklist td:first-child {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.checklist td:last-child {
+  color: var(--muted);
+}
+
+.result {
+  font-weight: 700;
+}
+
+.result-pass {
+  color: var(--pass);
+}
+
+.result-fail {
+  color: var(--fail);
 }
 
 .card .card-context {
