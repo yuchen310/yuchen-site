@@ -646,6 +646,104 @@ code {
   margin-top: 1.25rem;
 }
 
+/* Diagrams whose last step branches downward: align steps by their top edge. */
+.flow-top {
+  align-items: flex-start;
+}
+
+.flow-top .flow-step + .flow-step::before {
+  bottom: auto;
+  top: calc(var(--box-h) / 2 - 1px);
+}
+
+.flow-top .flow-step + .flow-step::after {
+  bottom: auto;
+  top: calc(var(--box-h) / 2 - 6px);
+}
+
+.flow-step-wide {
+  flex-grow: 2;
+}
+
+.flow-branches {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.flow-branches .flow-box {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Each branch gets a short arrow down from the step above. */
+.flow-branches .flow-box::before,
+.flow-branches .flow-box::after {
+  content: "";
+  position: absolute;
+}
+
+.flow-branches .flow-box::before {
+  top: calc(-1.75rem + 2px);
+  left: calc(50% - 1px);
+  height: calc(1.75rem - 10px);
+  border-left: 2px solid var(--muted);
+}
+
+.flow-branches .flow-box::after {
+  top: -8px;
+  left: calc(50% - 6px);
+  border: 6px solid transparent;
+  border-bottom: 0;
+  border-top: 7px solid var(--muted);
+}
+
+/* Screenshot captions, and pairs shown side by side on wide screens. */
+.screenshot figcaption {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.screenshot-pair {
+  display: grid;
+  gap: 1.5rem 1rem;
+  margin-top: 1.5rem;
+}
+
+.screenshot-pair .screenshot {
+  margin: 0;
+  min-width: 0;
+}
+
+@media (min-width: 40rem) {
+  .screenshot-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Stacked branching diagram: centre the steps so both branches hang below the last one. */
+@media (max-width: 40rem) {
+  .flow-top .flow-step > .flow-box {
+    margin-inline: auto;
+  }
+
+  .flow-top .flow-step + .flow-step::before {
+    top: calc(-1 * var(--gap) + 2px);
+    left: calc(50% - 1px);
+  }
+
+  .flow-top .flow-step + .flow-step::after {
+    top: -8px;
+    left: calc(50% - 6px);
+  }
+
+  .flow .flow-branches .flow-box {
+    width: auto;
+  }
+}
+
 @media (max-width: 40rem) {
   .flow {
     flex-direction: column;
