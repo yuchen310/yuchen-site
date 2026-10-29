@@ -433,6 +433,182 @@ ul.prose-list {
   color: var(--fail);
 }
 
+/* At-a-glance summary box */
+.at-a-glance {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 40rem;
+  margin: 1.75rem 0 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-alt);
+  font-size: 0.9375rem;
+}
+
+.at-a-glance div {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0 1rem;
+}
+
+.at-a-glance dt {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.at-a-glance dd {
+  margin: 0;
+  min-width: 0;
+}
+
+/* Inline code and code blocks */
+code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875em;
+  overflow-wrap: anywhere;
+}
+
+.code-block {
+  max-width: 100%;
+  margin: 1.25rem 0 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-alt);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.code-block code {
+  font-size: 0.875rem;
+  overflow-wrap: normal;
+}
+
+/* Screenshots and diagrams */
+.screenshot,
+.diagram {
+  margin: 1.5rem 0 0;
+}
+
+.screenshot img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.diagram-scroll {
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-alt);
+}
+
+.diagram svg {
+  display: block;
+  width: 100%;
+  min-width: 34rem;
+  max-width: 45rem;
+  height: auto;
+  margin: 0 auto;
+}
+
+.diagram-box {
+  fill: var(--bg);
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+
+.diagram-box-mine {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.diagram-box-external {
+  stroke-dasharray: 6 4;
+}
+
+.diagram-label,
+.diagram-sublabel {
+  text-anchor: middle;
+  dominant-baseline: middle;
+  font-family: inherit;
+}
+
+.diagram-label {
+  fill: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.diagram-sublabel {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.diagram-sublabel-mine {
+  fill: var(--accent);
+  font-weight: 600;
+}
+
+.diagram-line {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.diagram-line-dashed {
+  stroke-dasharray: 5 4;
+}
+
+.diagram-arrowhead {
+  fill: var(--muted);
+}
+
+/* Cost breakdown table */
+.cost-table {
+  min-width: 32rem;
+}
+
+.cost-table th[scope="row"] {
+  background: none;
+  font-size: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.cost-table td:nth-child(n + 2),
+.cost-table th[scope="col"]:nth-child(n + 2) {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.cost-table td:last-child {
+  color: var(--text);
+}
+
+.cost-table tr.cost-row th,
+.cost-table tr.cost-row td {
+  border-top: 2px solid var(--border);
+}
+
+.cost-table tr.cost-total th,
+.cost-table tr.cost-total td {
+  font-weight: 700;
+}
+
+.table-note {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
 .card .card-context {
   flex-grow: 0;
   margin-bottom: 0.75rem;
