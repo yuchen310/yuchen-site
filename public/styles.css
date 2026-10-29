@@ -743,6 +743,49 @@ code {
   font-size: 0.8125rem;
 }
 
+/* Project summary cards: 1 column on phones, 2 on tablets, 3 on wide screens. */
+.project-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 40rem) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 60rem) {
+  .project-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.project-card .card-summary,
+.project-card .card-role {
+  flex-grow: 0;
+}
+
+.project-card .card-role {
+  margin-top: 0.6rem;
+}
+
+.project-card .card-role strong {
+  color: var(--text);
+}
+
+/* Links sit at the bottom of the card so they line up across a row. */
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.card-links .card-link {
+  margin-top: 0;
+}
+
 .status {
   color: var(--muted);
   margin: 0;
