@@ -63,7 +63,8 @@ a:hover {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   line-height: 1.2;
   margin: 0 0 0.75rem;
 }
@@ -251,17 +252,36 @@ section:nth-of-type(even) {
   min-width: 0;
 }
 
-.card h3 {
+.card h3,
+.card h4 {
+  font-size: 1.0625rem;
   overflow-wrap: anywhere;
 }
 
-.card h3 a {
+.card h3 a,
+.card h4 a {
   color: var(--text);
   text-decoration: none;
 }
 
-.card h3 a:hover {
+.card h3 a:hover,
+.card h4 a:hover {
   color: var(--accent);
+}
+
+/* Project categories */
+.project-group + .project-group {
+  margin-top: 2.5rem;
+}
+
+.group-heading {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
 }
 
 .card p {
