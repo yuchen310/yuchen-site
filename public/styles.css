@@ -417,6 +417,15 @@ ul.prose-list {
   font-variant-numeric: tabular-nums;
 }
 
+/* Text comparison tables: every column wraps, and the last isn't muted. */
+.compare-table td:first-child {
+  white-space: normal;
+}
+
+.checklist.compare-table td:last-child {
+  color: var(--text);
+}
+
 .checklist td:last-child {
   color: var(--muted);
 }
@@ -623,6 +632,18 @@ code {
   border: 6px solid transparent;
   border-bottom: 0;
   border-top: 7px solid var(--muted);
+}
+
+.flow-note {
+  max-width: 48rem;
+  margin: 1rem auto 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.case-study .flow-diagram + .prose {
+  margin-top: 1.25rem;
 }
 
 @media (max-width: 40rem) {
