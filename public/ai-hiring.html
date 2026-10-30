@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cross-Cultural Bias in AI Hiring | Lim Yu Chen</title>
+  <meta name="description" content="Case study: designing the keyword dictionaries behind an experiment testing whether LLMs favour agentic over communal framing of the same candidate.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Apply the theme before first paint to avoid a flash of the wrong colours.
+    (function () {
+      var stored = null;
+      try { stored = sessionStorage.getItem("theme"); } catch (e) {}
+      var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", dark);
+    })();
+  </script>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="nav-name" href="index.html#hero">Lim Yu Chen</a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#repos">Repos</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="case-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#projects">← Back to portfolio</a>
+        <h1>Cross-Cultural Bias in AI Hiring</h1>
+        <p class="case-meta">Integrated Team Project (ICT2114) with the Singapore University of Social Sciences · SIT · May–December 2026 · ongoing</p>
+
+        <dl class="at-a-glance" aria-label="At a glance">
+          <div>
+            <dt>Role</dt>
+            <dd>Dictionary designer (experimental materials)</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>Software engineering student team, with an industry supervisor from SUSS</dd>
+          </div>
+          <div>
+            <dt>My part</dt>
+            <dd>The keyword dictionaries for job descriptions and cover letters</dd>
+          </div>
+          <div>
+            <dt>Tools</dt>
+            <dd>Excel, Python, public cover letter dataset, real job postings</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="case-study">
+      <div class="container">
+        <h2>The question</h2>
+        <p class="prose">Large language models are increasingly used to screen job candidates and are often assumed to be objective. Much of their training data, though, is Western-centric, and Western ideals of leadership tend to reward agentic competence: being assertive, independent and individually driven. Many Asian and collectivist cultures value relational competence just as highly: collaboration, coordination and keeping a team working together. This project asks whether LLMs treat these as equally valid ways to be competent, or systematically favour one.</p>
+
+        <h2>How the study works</h2>
+        <figure class="flow-diagram">
+          <ol class="flow flow-center" aria-label="Study design: the same job and qualifications, written three ways (agentic, communal, neutral), evaluated by LLMs, with scores compared across role levels and regions">
+            <li class="flow-step"><span class="flow-box">Same job and same qualifications</span></li>
+            <li class="flow-step">
+              <span class="flow-box">Written three ways
+                <span class="flow-pills"><span>Agentic</span><span>Communal</span><span>Neutral</span></span>
+              </span>
+            </li>
+            <li class="flow-step"><span class="flow-box">Evaluated by LLMs</span></li>
+            <li class="flow-step"><span class="flow-box">Scores compared <small>across role levels and regions</small></span></li>
+          </ol>
+        </figure>
+        <p class="prose">The only thing that changes between versions of a candidate is how their competence is framed. That framing comes from the keyword dictionaries, which is why they had to be right before any data was generated.</p>
+
+        <h2>My part: the dictionaries</h2>
+        <p class="prose">I built two separate dictionaries, because they do different jobs: job descriptions use requirement language ("you will lead…"), while cover letters use self-presentation ("I led…").</p>
+
+        <h3>Job description dictionary</h3>
+        <p class="prose">I narrowed the supervisor's original competence dictionary down to one natural, job-description-ready form per word family, kept its sub-categories, and wrote the neutral list from scratch, checking it against the other two lists to remove overlap. After feedback, I added a dual-competence category for words and phrases that combine both styles, such as "supportive leadership".</p>
+
+        <div class="table-scroll" role="region" aria-label="Job description dictionary categories" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Category</th>
+                <th scope="col">Words</th>
+                <th scope="col">Sub-categories</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Agentic</td>
+                <td>61</td>
+                <td>Communication, Expertise, Leadership, Personality, Workstyle</td>
+              </tr>
+              <tr>
+                <td>Communal</td>
+                <td>50</td>
+                <td>Personality, Service, Teamwork</td>
+              </tr>
+              <tr>
+                <td>Neutral</td>
+                <td>40</td>
+                <td>Culture, Logistics, Process, Role</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="word-samples" aria-label="Job description dictionary word samples">
+          <div class="word-group">
+            <p class="word-group-label">Agentic</p>
+            <ul class="pill-list">
+              <li>assertive</li><li>decisive</li><li>self-starter</li><li>ownership</li><li>strategic</li><li>initiative</li>
+            </ul>
+          </div>
+          <div class="word-group">
+            <p class="word-group-label">Communal</p>
+            <ul class="pill-list">
+              <li>empathetic</li><li>collaborate</li><li>coordinate</li><li>facilitate</li><li>relationship-building</li><li>stakeholder alignment</li>
+            </ul>
+          </div>
+          <div class="word-group">
+            <p class="word-group-label">Neutral</p>
+            <ul class="pill-list">
+              <li>qualifications</li><li>responsibilities</li><li>schedule</li><li>hybrid</li><li>candidate</li><li>role</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Cover letter dictionary</h3>
+        <p class="prose">I extracted agentic and communal words by comparing word frequencies between paired agentic and communal versions of the same cover letters in a public dataset. Neutral words came from vocabulary both versions share, checked against real cover letter guides for sales, supply chain and project manager roles.</p>
+
+        <div class="word-samples" aria-label="Cover letter dictionary word samples">
+          <div class="word-group">
+            <p class="word-group-label">Agentic</p>
+            <ul class="pill-list">
+              <li>strategic</li><li>self-motivated</li><li>act decisively</li><li>delivering</li><li>problem-solving</li><li>ambitious goals</li>
+            </ul>
+          </div>
+          <div class="word-group">
+            <p class="word-group-label">Communal</p>
+            <ul class="pill-list">
+              <li>contribute</li><li>cohesive</li><li>collaborative effort</li><li>collective goals</li><li>cooperative spirit</li><li>developing alongside the team</li>
+            </ul>
+          </div>
+          <div class="word-group">
+            <p class="word-group-label">Neutral</p>
+            <ul class="pill-list">
+              <li>skills</li><li>position</li><li>project</li><li>role</li><li>opportunity</li><li>application</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>Same fact, different framing</h2>
+        <p class="prose">The dictionary also includes a skill-framing table: one neutral fact, written with an agentic or a communal verb. This is how two candidates can have identical experience but present it differently.</p>
+
+        <div class="table-scroll" role="region" aria-label="Skill framing" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Skill</th>
+                <th scope="col">Neutral</th>
+                <th scope="col">Agentic framing</th>
+                <th scope="col">Communal framing</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Leadership</td>
+                <td>Led a team</td>
+                <td>Directed, spearheaded, drove</td>
+                <td>Guided, mentored, supported</td>
+              </tr>
+              <tr>
+                <td>Teamwork</td>
+                <td>Worked with others</td>
+                <td>Coordinated, orchestrated</td>
+                <td>Collaborated, partnered</td>
+              </tr>
+              <tr>
+                <td>Problem-solving</td>
+                <td>Solved a problem</td>
+                <td>Resolved, tackled, overcame</td>
+                <td>Worked through, addressed together</td>
+              </tr>
+              <tr>
+                <td>Communication</td>
+                <td>Communicated information</td>
+                <td>Presented, persuaded, pitched</td>
+                <td>Facilitated, explained, shared</td>
+              </tr>
+              <tr>
+                <td>Project management</td>
+                <td>Managed a project</td>
+                <td>Drove, executed, delivered</td>
+                <td>Coordinated, supported, helped deliver</td>
+              </tr>
+              <tr>
+                <td>Data and analysis</td>
+                <td>Analysed data</td>
+                <td>Identified, uncovered, optimised</td>
+                <td>Interpreted for the team, translated for stakeholders</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>The hardest part: competence style vs candidate quality</h2>
+        <p class="prose">The most important lesson came from supervisor feedback. Some words do not signal how a candidate frames competence; they signal how good the candidate is. If those words appear in only one condition, the LLM might score that candidate higher for being better, not for being more agentic, and the experiment would measure the wrong thing.</p>
+
+        <div class="table-scroll" role="region" aria-label="Removed words" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Removed</th>
+                <th scope="col">Why</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>strong, proven, exceptional, track record, significant impact</td>
+                <td>Signal candidate quality, not competence style</td>
+              </tr>
+              <tr>
+                <td>honored, daily duties</td>
+                <td>Make a communal candidate sound passive or overly humble</td>
+              </tr>
+              <tr>
+                <td>domination, crushing, conquer, unrivaled</td>
+                <td>Too extreme to appear in a real cover letter</td>
+              </tr>
+              <tr>
+                <td>obey, subordinate, hesitant, passive</td>
+                <td>Signal weakness rather than relational competence</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="prose">Excluded words were kept in a separate list with a reason for each, so every removal can be explained.</p>
+
+        <h2>Five versions, each with a reason</h2>
+        <div class="table-scroll" role="region" aria-label="Dictionary versions" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Version</th>
+                <th scope="col">Agentic · Communal · Neutral</th>
+                <th scope="col">What changed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>v1</td>
+                <td>18 · 18 · 32</td>
+                <td>First extraction from the paired cover letters, validated against real guides</td>
+              </tr>
+              <tr>
+                <td>v2</td>
+                <td>19 · 16 · 32</td>
+                <td>Added a quality-bias flag and a reason to every word, after supervisor feedback</td>
+              </tr>
+              <tr>
+                <td>v3</td>
+                <td>54 · 29 · 41</td>
+                <td>Restructured: each entry lists its word variants, and extreme or quality-signalling words moved to a separate excluded list (25 words)</td>
+              </tr>
+              <tr>
+                <td>v4</td>
+                <td>54 · 29 · 41</td>
+                <td>Refined the excluded list to 21 words</td>
+              </tr>
+              <tr>
+                <td>v5</td>
+                <td>54 · 29 · 41</td>
+                <td>Expanded the skill-framing table with past (-ed) and present (-ing) forms of each verb</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Traceability</h2>
+        <p class="prose">When asked why particular words such as "principled" and "qualitative" were included, I traced each one back to the wildcard expansion in the supervisor's original source file. Every word in both dictionaries can be explained by where it came from and why it stayed.</p>
+
+        <h2>Where it fits in the study</h2>
+        <p class="prose">The dictionaries generate the experimental materials. From there, the team's pipeline collected and analysed 57,600 LLM evaluations across 384 combinations of condition and region, with 7 scores per combination and 2,688 statistical tests.</p>
+
+        <h2>What I learned</h2>
+        <ul class="prose-list">
+          <li>Much of a study's validity is decided before any data exists. A keyword list looks like a mechanical extraction task, but a few wrong words would have quietly biased every result.</li>
+          <li>The difference between "how someone presents" and "how good someone is" is easy to miss and essential to control. It's the same thinking as keeping a test from passing for the wrong reason.</li>
+          <li>Document decisions as you make them. Being asked to justify individual words weeks later showed me that reproducibility depends on the trail, not on memory.</li>
+          <li>Keeping the job description and cover letter dictionaries separate was less convenient, but it was the right call: they serve different linguistic purposes.</li>
+        </ul>
+
+        <p class="case-footer-link"><a class="back-link" href="index.html#projects">← Back to portfolio</a></p>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>↑ Top</button>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> Lim Yu Chen</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
