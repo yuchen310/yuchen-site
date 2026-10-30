@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hand Hygiene Awareness Jingle | Lim Yu Chen</title>
+  <meta name="description" content="Case study: a ward jingle to sustain the five moments of hand hygiene, designed after a hospital visit showed staff were overloaded with reminders.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Apply the theme before first paint to avoid a flash of the wrong colours.
+    (function () {
+      var stored = null;
+      try { stored = sessionStorage.getItem("theme"); } catch (e) {}
+      var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", dark);
+    })();
+  </script>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="nav-name" href="index.html#hero">Lim Yu Chen</a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#repos">Repos</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="case-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#projects">← Back to portfolio</a>
+        <h1>Hand Hygiene Awareness Jingle</h1>
+        <p class="case-meta">USI2001 Social Innovation Project · SIT · with Tan Tock Seng Hospital · 2026</p>
+
+        <dl class="at-a-glance" aria-label="At a glance">
+          <div>
+            <dt>Team</dt>
+            <dd>5 ("Wash Warriors", group 109)</dd>
+          </div>
+          <div>
+            <dt>My part</dt>
+            <dd>Research and the video</dd>
+          </div>
+          <div>
+            <dt>Partner</dt>
+            <dd>Tan Tock Seng Hospital (site visit)</dd>
+          </div>
+          <div>
+            <dt>Output</dt>
+            <dd>A proposed ward jingle, presented with lyrics and a video demo</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="case-study">
+      <div class="container">
+        <figure class="screenshot case-lead-image">
+          <a href="img/hand-hygiene/title.jpg" target="_blank" rel="noopener">
+            <img src="img/hand-hygiene/title.jpg" width="2200" height="1238" loading="lazy"
+              alt="Title slide on a blue background illustrated with cartoon hands washing and children at sinks, reading 'USI2001 SIP: Retaining Five moments of Hand Hygiene', presented by Wash Warriors (group 109).">
+          </a>
+          <figcaption>Our proposal: retaining the five moments of hand hygiene.</figcaption>
+        </figure>
+
+        <h2>The problem</h2>
+        <p class="prose">How might we improve and sustain the five moments of hand hygiene for healthcare workers across healthcare facilities?</p>
+        <p class="prose">The World Health Organization defines five moments when healthcare workers must clean their hands:</p>
+        <ol class="prose-list">
+          <li>Before touching a patient</li>
+          <li>Before a clean or aseptic procedure, such as inserting an IV</li>
+          <li>After risk of exposure to body fluids</li>
+          <li>After touching a patient</li>
+          <li>After touching a patient's surroundings</li>
+        </ol>
+        <p class="prose">Hospitals already know these rules. The challenge is keeping staff following them every shift without wearing them down.</p>
+
+        <h2>What we explored</h2>
+        <p class="prose">We brainstormed three directions: a hand hygiene jingle, more visual cues such as floor markings and signage, and motion-sensor reminders. Before choosing, we visited Tan Tock Seng Hospital to see what was already in place.</p>
+
+        <h2>What the site visit showed</h2>
+        <div class="gallery">
+          <figure class="screenshot">
+            <a href="img/hand-hygiene/ward-observations.jpg" target="_blank" rel="noopener">
+              <img src="img/hand-hygiene/ward-observations.jpg" width="2200" height="1238" loading="lazy"
+                alt="Observations slide with two ward photos: a hospital bed with a sanitiser bottle clipped to its frame, and a sink area with a soap dispenser, sanitiser and a five moments of hand hygiene poster, each circled in red.">
+            </a>
+            <figcaption>Every bed has its own sanitiser, and every sink has a five-moments poster.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/hand-hygiene/delivery-robot.jpg" target="_blank" rel="noopener">
+              <img src="img/hand-hygiene/delivery-robot.jpg" width="2200" height="1238" loading="lazy"
+                alt="Operational Technology slide showing the hospital's shelved delivery robot, nicknamed Peter, with notes that it delivers documents and medication, plays vocal reminders to sanitise on doctors' rounds, and became noise pollution for staff.">
+            </a>
+            <figcaption>A delivery robot that played spoken hand hygiene reminders on ward rounds.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/hand-hygiene/sensor-speakers.jpg" target="_blank" rel="noopener">
+              <img src="img/hand-hygiene/sensor-speakers.jpg" width="2200" height="1238" loading="lazy"
+                alt="Operational Technology slide with two photos of a small motion-sensor speaker mounted above a corridor handrail, noting it reminds people near entry and exit doors to sanitise and saw limited adoption.">
+            </a>
+            <figcaption>Motion-sensor speakers near doors, reminding people to sanitise.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/hand-hygiene/key-findings.jpg" target="_blank" rel="noopener">
+              <img src="img/hand-hygiene/key-findings.jpg" width="2200" height="1238" loading="lazy"
+                alt="Key Findings slide listing: an audit system checks nurses' hand hygiene with incentives for doing well; many visual cues are posted around the wards; nurses were previously told to remove posters near their work area; and nurses raised concerns about visual and audio overwhelm.">
+            </a>
+            <figcaption>What we learned from staff.</figcaption>
+          </figure>
+        </div>
+
+        <p class="prose">The hospital was not short of reminders. It had too many of them.</p>
+
+        <div class="table-scroll" role="region" aria-label="Existing reminders and what happened" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Existing reminder</th>
+                <th scope="col">What happened</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Posters at every sink and bed</td>
+                <td>Nurses had previously been asked to remove posters near their work areas</td>
+              </tr>
+              <tr>
+                <td>Robot with spoken reminders</td>
+                <td>Worked at first, then became noise pollution for nurses and doctors</td>
+              </tr>
+              <tr>
+                <td>Motion-sensor speakers</td>
+                <td>Installed near entrances, but saw limited adoption</td>
+              </tr>
+              <tr>
+                <td>Audits with incentives</td>
+                <td>Already in place to check nurses' hand hygiene</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="prose">The key finding: staff were experiencing visual and audio overload. Another reminder of the same kind would make the problem worse.</p>
+
+        <h2>Our proposal</h2>
+        <figure class="screenshot">
+          <a href="img/hand-hygiene/proposed-solution.jpg" target="_blank" rel="noopener">
+            <img src="img/hand-hygiene/proposed-solution.jpg" width="2200" height="1238" loading="lazy"
+              alt="Proposed Solution slide decorated with music notes and a boombox, listing a short catchy jingle played periodically across wards via the speaker system, lyrics built around the WHO's five moments, spaced intervals to avoid annoyance, no monitoring of staff, and a collective reminder for the whole ward.">
+          </a>
+          <figcaption>The proposed solution.</figcaption>
+        </figure>
+
+        <p class="prose">A short, catchy jingle played periodically across hospital wards through the speaker system, with lyrics built around the five moments. It was designed specifically against the problems we saw:</p>
+
+        <ul class="principle-grid">
+          <li class="principle">
+            <h3>Spaced out</h3>
+            <p>Plays at intervals, so it doesn't become another constant noise.</p>
+          </li>
+          <li class="principle">
+            <h3>Not personal</h3>
+            <p>No one is monitored or tracked, which reduces resistance.</p>
+          </li>
+          <li class="principle">
+            <h3>Whole ward at once</h3>
+            <p>A shared reminder rather than one aimed at individuals.</p>
+          </li>
+          <li class="principle">
+            <h3>Easy to remember</h3>
+            <p>The five moments set to music instead of another poster.</p>
+          </li>
+        </ul>
+
+        <h2>The jingle</h2>
+        <figure class="screenshot">
+          <a href="img/hand-hygiene/song-demo.jpg" target="_blank" rel="noopener">
+            <img src="img/hand-hygiene/song-demo.jpg" width="2200" height="1238" loading="lazy"
+              alt="Song Demo slide with an illustration of hands lathering soap on the left and the full jingle lyrics on the right, with verses, a bridge and repeated choruses.">
+          </a>
+          <figcaption>Presenting the song demo.</figcaption>
+        </figure>
+
+        <div class="lyrics" aria-label="Jingle lyrics">
+          <p class="stanza">
+            <span class="stanza-label">Verse 1</span>
+            Before you touch a patient, stop and take a beat,<br>
+            Wash your hands and make them clean, from your head down to your feet!<br>
+            After touchin' patients, don't forget the rule,<br>
+            Clean those hands, keep 'em safe, it's the hygiene golden tool!
+          </p>
+          <p class="stanza">
+            <span class="stanza-label">Chorus</span>
+            Wash, wash, wash your hands, make them clean and bright,<br>
+            Before, after, and all the way, keep 'em clean and light!<br>
+            Scrub those germs away, wash 'em every day,<br>
+            For the health of all, let's stay safe and strong today!
+          </p>
+          <p class="stanza">
+            <span class="stanza-label">Verse 2</span>
+            When you handle things, or fluids, don't delay,<br>
+            Wash your hands the right way, every single day!<br>
+            After touching the surroundings, let's be sure,<br>
+            Clean hands are the best, they're the safest, that's for sure!
+          </p>
+        </div>
+
+        <h2>What I learned</h2>
+        <ul class="prose-list">
+          <li>Visiting the site changed our understanding of the problem. We expected to find too few reminders and found too many; the real issue was fatigue, not awareness.</li>
+          <li>A good solution can be defined by what it avoids. Our design principles came straight from what had already failed at the hospital.</li>
+          <li>Users' reactions to an intervention matter as much as whether it works. The robot was effective until staff found it annoying, which made it unsustainable.</li>
+        </ul>
+
+        <p class="case-footer-link"><a class="back-link" href="index.html#projects">← Back to portfolio</a></p>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>↑ Top</button>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> Lim Yu Chen</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
