@@ -968,6 +968,93 @@ code {
   margin-top: 2rem;
 }
 
+/* An image that opens a case study sits flush with the top of the section. */
+.case-study .case-lead-image {
+  margin-top: 0;
+}
+
+.case-study .screenshot + .prose {
+  margin-top: 1.25rem;
+}
+
+/* Solution principles as small cards: 1 column, then 2 x 2, then 4 across. */
+.principle-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 40rem) {
+  .principle-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 60rem) {
+  .principle-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.principle {
+  min-width: 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--bg-alt);
+}
+
+.case-study .principle h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.principle p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+/* Lyrics: a quiet block with each stanza's lines kept as written. */
+.lyrics {
+  max-width: 40rem;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--bg-alt);
+  color: var(--text);
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.75;
+}
+
+.stanza {
+  margin: 0;
+}
+
+.stanza + .stanza {
+  margin-top: 1.25rem;
+}
+
+.stanza-label {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.case-study .principle-grid + h2,
+.case-study .lyrics + h2 {
+  margin-top: 2.75rem;
+}
+
 /* Stacked branching diagram: centre the steps so both branches hang below the last one. */
 @media (max-width: 40rem) {
   .flow-top .flow-step > .flow-box {
