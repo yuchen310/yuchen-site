@@ -879,6 +879,95 @@ code {
   margin-top: 1.25rem;
 }
 
+/* Word samples: pill-shaped tags grouped by category, all in one neutral style. */
+.word-samples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.word-group {
+  min-width: 0;
+}
+
+.case-study .word-group-label {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pill-list li,
+.flow-pills span {
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+/* Diagrams whose boxes differ in height: centre the row and put arrows at mid-height. */
+.flow-center {
+  align-items: center;
+}
+
+.flow-center .flow-step + .flow-step::before {
+  bottom: auto;
+  top: calc(50% - 1px);
+}
+
+.flow-center .flow-step + .flow-step::after {
+  bottom: auto;
+  top: calc(50% - 6px);
+}
+
+@media (max-width: 40rem) {
+  .flow-center {
+    align-items: stretch;
+  }
+
+  .flow-center .flow-step + .flow-step::before {
+    top: calc(-1 * var(--gap) + 2px);
+  }
+
+  .flow-center .flow-step + .flow-step::after {
+    top: -8px;
+  }
+}
+
+/* Mini pills inside a diagram box. */
+.flow-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+}
+
+.flow-pills span {
+  padding: 0.05rem 0.45rem;
+  background: var(--bg-alt);
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+.case-study .word-samples + .prose,
+.case-study .word-samples + h3 {
+  margin-top: 2rem;
+}
+
 /* Stacked branching diagram: centre the steps so both branches hang below the last one. */
 @media (max-width: 40rem) {
   .flow-top .flow-step > .flow-box {
