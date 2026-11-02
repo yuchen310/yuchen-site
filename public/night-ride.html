@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fatigue-Aware Late-Night Ride-Sharing App | Lim Yu Chen</title>
+  <meta name="description" content="Case study: NFC check-in for a demand-responsive late-night ride-sharing app designed for tired shift workers.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Apply the theme before first paint to avoid a flash of the wrong colours.
+    (function () {
+      var stored = null;
+      try { stored = sessionStorage.getItem("theme"); } catch (e) {}
+      var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", dark);
+    })();
+  </script>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="nav-name" href="index.html#hero">Lim Yu Chen</a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#repos">Repos</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="case-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#projects">← Back to portfolio</a>
+        <h1>Fatigue-Aware Late-Night Ride-Sharing App</h1>
+        <p class="case-meta">Course project · INF2007 Mobile Application Development, SIT · 2026</p>
+
+        <dl class="at-a-glance" aria-label="At a glance">
+          <div>
+            <dt>Team</dt>
+            <dd>5</dd>
+          </div>
+          <div>
+            <dt>My part</dt>
+            <dd>NFC check-in feature</dd>
+          </div>
+          <div>
+            <dt>Architecture</dt>
+            <dd>Client–server, MVVM on the mobile client, REST APIs</dd>
+          </div>
+          <div>
+            <dt>Mobile features</dt>
+            <dd>GPS, NFC, real-time route optimisation, voice interaction</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="case-study">
+      <div class="container">
+        <h2>The problem</h2>
+        <p class="prose">Late-night shift workers in healthcare, logistics, food and beverage, and security often travel home between 22:00 and 06:00, tired. Fixed-route buses don't adapt to demand, so waits are long and routes take detours. Ride-hailing is expensive, and it doesn't combine passengers heading in similar directions.</p>
+
+        <h2>The idea</h2>
+        <p class="prose">A shared, demand-responsive vehicle whose route is generated from the passengers actually on board. Each passenger books a ride, checks in with NFC when boarding, follows the live route and ETA, and gets an alert before their stop. Because the users are tired, every screen is designed for low effort: a low-glare night mode that switches on automatically, large controls, and voice commands for hands-free questions such as "how much longer?"</p>
+
+        <h2>The app</h2>
+        <div class="gallery gallery-phones">
+          <figure class="screenshot">
+            <a href="img/night-ride/ride-booking.png" target="_blank" rel="noopener">
+              <img src="img/night-ride/ride-booking.png" width="438" height="932" loading="lazy"
+                alt="Dark-themed Book Your Ride screen with pickup and drop-off fields, a passenger counter set to 1, Shared Ride and Private Ride options with Shared Ride selected, an estimated time of 25 minutes and cost of $22.50, and a Confirm Booking button.">
+            </a>
+            <figcaption>Booking: pickup, destination, passengers, and shared or private ride.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/night-ride/nfc-check-in.png" target="_blank" rel="noopener">
+              <img src="img/night-ride/nfc-check-in.png" width="438" height="932" loading="lazy"
+                alt="NFC Check-In screen with a large contactless icon, the instruction 'Tap your phone to the NFC reader', status 'Ready to Scan', a progress bar and the last check-in time.">
+            </a>
+            <figcaption>Tap the phone on the vehicle's reader to check in.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/night-ride/live-route.png" target="_blank" rel="noopener">
+              <img src="img/night-ride/live-route.png" width="438" height="932" loading="lazy"
+                alt="Live route screen with a dark map marked 'You Are Here' at Oakland Ave, a route progress bar at 50 percent, and upcoming stops: Oakland Ave as the current stop, Elm Street Station in 2 minutes and Central Park Entrance in 8 minutes.">
+            </a>
+            <figcaption>Live route with progress, upcoming stops and ETA.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/night-ride/stop-alerts.png" target="_blank" rel="noopener">
+              <img src="img/night-ride/stop-alerts.png" width="438" height="964" loading="lazy"
+                alt="Stop Alerts screen listing three alerts (a passenger's destination in 3 minutes, the next pickup in 8 minutes and a route change in 12 minutes), each with an on/off toggle and Snooze and Dismiss buttons.">
+            </a>
+            <figcaption>Alerts before each stop, with snooze and dismiss.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/night-ride/voice-interaction.png" target="_blank" rel="noopener">
+              <img src="img/night-ride/voice-interaction.png" width="438" height="964" loading="lazy"
+                alt="Voice Interaction screen showing 'Ready for input', a large microphone button, and a list of recent commands including 'How much time until we arrive'.">
+            </a>
+            <figcaption>Hands-free voice commands.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <a href="img/night-ride/ride-completion.png" target="_blank" rel="noopener">
+              <img src="img/night-ride/ride-completion.png" width="438" height="932" loading="lazy"
+                alt="Ride Completed screen with a trip summary (25 minutes, 5 miles, $12.50) and payment details: base fare $10.00, service fee $1.00, taxes and tolls $1.50, total paid $12.50.">
+            </a>
+            <figcaption>Trip summary and payment breakdown.</figcaption>
+          </figure>
+        </div>
+
+        <h2>How it fits together</h2>
+        <figure class="screenshot screenshot-full">
+          <a href="img/night-ride/system-context.png" target="_blank" rel="noopener">
+            <img src="img/night-ride/system-context.png" width="1400" height="976" loading="lazy"
+              alt="System context diagram with the Mobile Application at the centre. The Passenger sends NFC tap events and ride booking details to it and receives booking confirmation and the route display. The app sends booking, route optimisation, NFC validation and location update requests to the Ride Sharing Backend, which returns the optimised route and authentication confirmation. The app exchanges the optimised route and route visualisation with a Maps API.">
+          </a>
+          <figcaption>System context: passenger, mobile app, ride-sharing backend and maps service.</figcaption>
+        </figure>
+
+        <figure class="screenshot screenshot-full">
+          <a href="img/night-ride/layered-architecture.png" target="_blank" rel="noopener">
+            <img src="img/night-ride/layered-architecture.png" width="1400" height="1671" loading="lazy"
+              alt="Layered architecture diagram. The presentation layer holds the booking, NFC check-in, live route, route completion and voice interaction UIs and the ViewModels. The application and domain layer holds booking, NFC check-in, route optimisation and live tracking controls, and the ride, vehicle, passenger, booking, route, location update and payment entities. The data and infrastructure layer holds the backend booking API, NFC service, GPS service, routing engine, authentication API and database. Requests flow down between layers and responses flow up.">
+          </a>
+          <figcaption>Layered architecture: presentation, application and data layers.</figcaption>
+        </figure>
+
+        <p class="prose">The mobile app handles the screens and phone sensors; the backend handles bookings, groups passengers and computes the shared route. The route is first computed when a ride is booked, then recalculated after NFC check-in, so no-shows don't leave the vehicle detouring for passengers who never boarded.</p>
+
+        <h2>My part: NFC check-in</h2>
+        <p class="prose">I owned the NFC check-in feature (user story US-2, delivered in Sprint 2). When a passenger boards, they tap their phone on the vehicle's NFC reader. The app reads the card ID and sends it to the backend, which checks it against the booking and either confirms the check-in or rejects it.</p>
+
+        <figure class="screenshot screenshot-phone">
+          <a href="img/night-ride/nfc-check-in.png" target="_blank" rel="noopener">
+            <img src="img/night-ride/nfc-check-in.png" width="438" height="932" loading="lazy"
+              alt="NFC Check-In screen with a large contactless icon, the instruction 'Tap your phone to the NFC reader' and status 'Ready to Scan'.">
+          </a>
+          <figcaption>The check-in screen: tap the phone on the reader.</figcaption>
+        </figure>
+
+        <figure class="screenshot screenshot-full">
+          <a href="img/night-ride/nfc-sequence.png" target="_blank" rel="noopener">
+            <img src="img/night-ride/nfc-sequence.png" width="886" height="643" loading="lazy"
+              alt="Sequence diagram of the NFC check-in flow. The passenger taps an NFC card; the NFC UI reads the tag's UID through the device's NFC reader API and submits it to the NFC check-in control, which posts it to /nfc/validate on the validation backend. The backend checks the UID against the database. If valid, success is passed back and the passenger sees 'Check-in successful'; if invalid, an error is passed back and the passenger sees 'Check-in failed'.">
+          </a>
+          <figcaption>Check-in sequence: the reader passes the card ID to the backend, which confirms or rejects the check-in.</figcaption>
+        </figure>
+
+        <p class="prose">The work covered three sprint tasks:</p>
+        <div class="table-scroll" role="region" aria-label="Sprint tasks for NFC check-in" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Task</th>
+                <th scope="col">What it involved</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SB2-1</td>
+                <td>The check-in screen: a clear "ready to scan" state, progress while reading, and success or failure feedback</td>
+              </tr>
+              <tr>
+                <td>SB2-2</td>
+                <td>Reading the NFC card ID and validating it against the passenger's booking</td>
+              </tr>
+              <tr>
+                <td>SB2-3</td>
+                <td>Updating the ride status once a passenger is checked in</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="prose">Check-in is more than a convenience. It's the signal the backend uses to recalculate the shared route: once the system knows who has actually boarded, it can drop no-shows from the route instead of detouring to pick up passengers who aren't there.</p>
+        <p class="prose">Designing for tired users shaped the screen: one large target, a single instruction, and an unmistakable success or failure message, so a passenger doesn't need to read anything carefully at 3am.</p>
+
+        <h2>Requirements as user stories</h2>
+        <div class="table-scroll" role="region" aria-label="User stories" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">User story</th>
+                <th scope="col">Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>US-1</td>
+                <td>As a passenger, I want to select a pickup and destination so that I can request a ride</td>
+                <td>High</td>
+              </tr>
+              <tr>
+                <td>US-2</td>
+                <td>As a passenger, I want to check in using NFC so that the system can verify I've boarded</td>
+                <td>High</td>
+              </tr>
+              <tr>
+                <td>US-3</td>
+                <td>As a passenger, I want to see the live route and ETA so that I can track my ride</td>
+                <td>High</td>
+              </tr>
+              <tr>
+                <td>US-4</td>
+                <td>As a passenger, I want to use voice commands so that I can check status hands-free</td>
+                <td>Medium</td>
+              </tr>
+              <tr>
+                <td>US-5</td>
+                <td>As a passenger, I want night mode so that the screen is comfortable in the dark</td>
+                <td>Medium</td>
+              </tr>
+              <tr>
+                <td>US-6</td>
+                <td>As a passenger, I want alerts before my stop so that I don't miss it</td>
+                <td>Medium</td>
+              </tr>
+              <tr>
+                <td>US-7</td>
+                <td>As a passenger, I want the system to confirm ride completion so that my session ends correctly</td>
+                <td>Low</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Plan: three sprints</h2>
+        <div class="table-scroll" role="region" aria-label="Sprint plan" tabindex="0">
+          <table class="checklist compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Sprint</th>
+                <th scope="col">Focus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>App foundation (MVVM), ride booking, booking API, night-mode theming, mock GPS</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>NFC check-in, passenger grouping, graph-based route optimisation</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Live tracking, ETA updates, stop alerts, voice interaction, ride completion, final testing</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="prose">Work was tracked in GitHub Projects: each feature was an issue with labels, moved across a To Do → In Progress → Review → Done board.</p>
+
+        <h2>What I learned</h2>
+        <ul class="prose-list">
+          <li>Designing for a tired user changes every decision: fewer taps, bigger targets, a dark screen, and voice as a fallback.</li>
+          <li>Choosing when to recompute a route matters as much as how. Recalculating after check-in handles real-world no-shows without constant updates.</li>
+          <li>A small feature can carry a lot of weight. NFC check-in looks like a single tap, but it's what tells the backend who has really boarded, and the route depends on it.</li>
+        </ul>
+
+        <p class="case-footer-link"><a class="back-link" href="index.html#projects">← Back to portfolio</a></p>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>↑ Top</button>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> Lim Yu Chen</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
