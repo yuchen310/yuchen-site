@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Visuals – Multimedia Internship at Hexogon | Lim Yu Chen</title>
+  <meta name="description" content="Case study: projection animations for live events during a multimedia internship at Hexogon, including the Merlion at Marina Bay for the Singapore Countdown 2023–2024.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Apply the theme before first paint to avoid a flash of the wrong colours.
+    (function () {
+      var stored = null;
+      try { stored = sessionStorage.getItem("theme"); } catch (e) {}
+      var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", dark);
+    })();
+  </script>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="nav-name" href="index.html#hero">Lim Yu Chen</a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#repos">Repos</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="case-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#frontend">← Back to portfolio</a>
+        <h1>Event Visuals – Multimedia Internship at Hexogon</h1>
+        <p class="case-meta">Multimedia Intern · Hexogon Group of Companies · Sep 2023 – Feb 2024</p>
+
+        <figure class="screenshot screenshot-full">
+          <a href="img/hexogon/merlion-live.jpg" target="_blank" rel="noopener">
+            <img src="img/hexogon/merlion-live.jpg" width="1280" height="728"
+              alt="The Merlion at night, lit by a projection of colourful illustrations: puzzle-piece panels with figures of a couple and a family on its mane and body, blue scales and a pink tail with a small house. Water still arcs from its mouth, with the Esplanade and city lights behind.">
+          </a>
+          <figcaption>Live projection on the Merlion at Marina Bay, Singapore Countdown 2023–2024.</figcaption>
+        </figure>
+
+        <dl class="at-a-glance" aria-label="At a glance">
+          <div>
+            <dt>Role</dt>
+            <dd>Multimedia intern</dd>
+          </div>
+          <div>
+            <dt>Events</dt>
+            <dd>Singapore Countdown 2023–2024 (Marina Bay); Hexogon Christmas event</dd>
+          </div>
+          <div>
+            <dt>Tools</dt>
+            <dd>Adobe After Effects, Photoshop, Illustrator, Premiere Pro</dd>
+          </div>
+          <div>
+            <dt>Output</dt>
+            <dd>Projection animations for two live events (stills shown; original videos not available)</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="case-study">
+      <div class="container">
+        <h2>Projecting onto the Merlion</h2>
+        <p class="prose">For the Singapore Countdown, illustrated artwork was projected onto the Merlion at Marina Bay. Artwork that looks right on a flat screen does not automatically work on a curved stone statue at night, viewed from across the bay.</p>
+
+        <figure class="screenshot screenshot-full">
+          <a href="img/hexogon/merlion-before-after.jpg" target="_blank" rel="noopener">
+            <img src="img/hexogon/merlion-before-after.jpg" width="1280" height="996" loading="lazy"
+              alt="Before and after comparison of two Merlion designs, each shown from the left, back and right. Top: a purple mane with musical notes and a green body with dancing figures; in the After version the mane panels have yellow outlines and the face is white. Bottom: a pink and blue puzzle-themed design; in the After version the blues are deeper, the panels are outlined and the details are brighter.">
+          </a>
+          <figcaption>Before: the original illustrations. After: adapted to the Merlion’s form for projection.</figcaption>
+        </figure>
+
+        <p class="prose">Comparing the two versions:</p>
+        <ul class="prose-list">
+          <li>Panels were reshaped to follow the Merlion’s mane and body, with outlines that catch the light and give the flat drawing depth on a 3D surface.</li>
+          <li>Colours were pushed brighter and deeper, because projected light on stone washes out and an audience sees it from a distance.</li>
+          <li>Details sized for a screen were simplified or enlarged so they stay readable from the waterfront.</li>
+        </ul>
+
+        <!-- TODO: add the credit for the original illustrations after "adapting each illustration to the Merlion's surface." (e.g. "The original illustrations were created by community artists." / "provided by the client.") -->
+        <p class="prose">I animated the artwork for projection, adapting each illustration to the Merlion’s surface. The images on this page are stills from the animation.</p>
+
+        <h2>Christmas window displays</h2>
+        <p class="prose">For Hexogon’s Christmas event, I produced two projection animations for a six-panel window, framed like a winter window looking out on a snowy scene. The images below are stills from the animations.</p>
+
+        <figure class="screenshot screenshot-full">
+          <a href="img/hexogon/christmas-window-1.jpg" target="_blank" rel="noopener">
+            <img src="img/hexogon/christmas-window-1.jpg" width="1280" height="480" loading="lazy"
+              alt="A six-panel window in a brown frame looking out on a watercolour village of snowy pink and purple houses under a full moon. The Hexogon logo sits faintly in the top-centre panel, and the bottom-centre panel shows a snowman beside a Merry Christmas sign. A pale diagonal sheen crosses the panels.">
+          </a>
+          <figcaption>Design 1: a watercolour winter village.</figcaption>
+        </figure>
+        <figure class="screenshot screenshot-full">
+          <a href="img/hexogon/christmas-window-2.jpg" target="_blank" rel="noopener">
+            <img src="img/hexogon/christmas-window-2.jpg" width="1280" height="480" loading="lazy"
+              alt="The same six-panel window looking out on a starry night over a snowy pine forest and lit cabins. The top row has glittering silver Merry Christmas text and a stocking, the Hexogon logo in silver and teal, and a reindeer-drawn sleigh, surrounded by snowflakes. A pale diagonal sheen crosses the panels.">
+          </a>
+          <figcaption>Design 2: a starry night forest with glitter accents.</figcaption>
+        </figure>
+
+        <p class="prose">Both designs place the company logo in the top-centre panel, and a diagonal light sheen runs across all six panels so they read as one window rather than six separate images. Each design treats the frame differently: the village is illustrated and warm, the forest is photographic and calm, giving the client two distinct directions to choose from.</p>
+
+        <h2>What I learned</h2>
+        <ul class="prose-list">
+          <li>Design for the medium, not the artboard. Projection, distance and a curved surface all changed what “finished” meant.</li>
+          <li>Client work comes with fixed deadlines that don’t move; delivering several pieces on time while keeping quality consistent was a skill in itself.</li>
+          <li>Offering two clearly different directions makes client decisions faster than offering small variations of one idea.</li>
+          <li>Keep copies of your own work. Both animations ran live, and the final videos stayed with the client. Now I save a copy of every finished piece for my portfolio, with permission.</li>
+        </ul>
+
+        <p class="case-footer-link"><a class="back-link" href="index.html#frontend">← Back to portfolio</a></p>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>↑ Top</button>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> Lim Yu Chen</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
