@@ -937,9 +937,14 @@ code {
   width: 100%;
 }
 
-/* Portrait story graphics: 1 column, 2 on tablets, 4 across on wide screens. */
+/* Images with transparent areas sit on white, so dark artwork stays visible in dark mode. */
+.screenshot-transparent img {
+  background: #fff;
+}
+
+/* A row of four portrait images (label drafts, stories): 1 column, 2 on tablets, 4 across on wide screens. */
 @media (min-width: 60rem) {
-  .gallery-stories {
+  .gallery-row-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
