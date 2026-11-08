@@ -937,6 +937,59 @@ code {
   width: 100%;
 }
 
+/* Portrait story graphics: 1 column, 2 on tablets, 4 across on wide screens. */
+@media (min-width: 60rem) {
+  .gallery-stories {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Colour palette: real swatches with their hex codes; 2 across on phones, 4 on wider screens. */
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 40rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .swatches {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.swatch {
+  margin: 0;
+}
+
+.swatch-chip {
+  display: block;
+  height: 4.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--swatch);
+}
+
+.swatch-hex {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-weight: 600;
+}
+
+.swatch-role {
+  display: block;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.case-study .swatches + .prose {
+  margin-top: 1.25rem;
+}
+
 /* Word samples: pill-shaped tags grouped by category, all in one neutral style. */
 .word-samples {
   display: grid;
