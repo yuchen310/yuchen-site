@@ -88,61 +88,16 @@
       <div class="container">
         <h2>Projects</h2>
 
-        <div class="project-group">
-          <h3 class="group-heading">Quality Assurance &amp; Testing</h3>
-          <ul class="card-grid project-grid">
-            <li class="card project-card">
-              <h4>QA Audit of a Requirements Engineering Process</h4>
-              <p class="card-context">Course project, ICT2113 Software Requirements Engineering, SIT (2026)</p>
-              <p class="card-summary">An independent audit of how a team produced a requirements specification, checking the process rather than the document.</p>
-              <p class="card-role"><strong>My role:</strong> Sole QA auditor; designed a 23-check checklist and found 9 governance gaps.</p>
-              <ul class="card-meta" aria-label="Topics">
-                <li>Quality Assurance</li>
-                <li>Process Audit</li>
-                <li>Requirements Engineering</li>
-              </ul>
-              <div class="card-links">
-                <a class="card-link" href="qa-audit.html">Read case study</a>
-              </div>
-            </li>
-            <li class="card project-card">
-              <h4>Dynamic Security Testing of a Peer Web App</h4>
-              <p class="card-context">Course project, ICT2216 Secure Software Development, SIT (2026) · QA phase</p>
-              <p class="card-summary">In the module's QA phase, black-box security testing of a different team's live web app, used to confirm or rule out issues found during source code review.</p>
-              <p class="card-role"><strong>My role:</strong> Ran the OWASP ZAP scans, including an authenticated scan behind two-factor login; confirmed 6 security header and configuration issues, while a teammate tested manually with Burp Suite.</p>
-              <ul class="card-meta" aria-label="Topics">
-                <li>DAST</li>
-                <li>OWASP ZAP</li>
-                <li>Authenticated Scanning</li>
-                <li>Security Testing</li>
-              </ul>
-              <div class="card-links">
-                <a class="card-link" href="dast.html">Read case study</a>
-              </div>
-            </li>
-            <li class="card project-card">
-              <h4>Spec-Based Test Suite with CI Quality Gate</h4>
-              <p class="card-context">Personal project (2026)</p>
-              <p class="card-summary">Playwright tests written only from a specification by a separate AI agent, run on every pull request to this site.</p>
-              <p class="card-role"><strong>My role:</strong> Set up the merge gate and triaged failures, catching a bug that only appeared on the live site.</p>
-              <ul class="card-meta" aria-label="Topics">
-                <li>Playwright</li>
-                <li>TypeScript</li>
-                <li>GitHub Actions</li>
-                <li>CI/CD</li>
-              </ul>
-              <div class="card-links">
-                <a class="card-link" href="https://github.com/yuchen310/yuchen-site-tests" target="_blank" rel="noopener">GitHub</a>
-              </div>
-            </li>
-          </ul>
+        <div class="project-tabs" role="tablist" aria-label="Project tracks" hidden>
+          <button type="button" class="project-tab" role="tab" id="tab-full-stack" data-track="fullstack" data-hash="full-stack" aria-selected="false" aria-controls="projects-panel" tabindex="-1">Full-Stack</button>
+          <button type="button" class="project-tab" role="tab" id="tab-frontend" data-track="frontend" data-hash="frontend" aria-selected="false" aria-controls="projects-panel" tabindex="-1">Frontend</button>
+          <button type="button" class="project-tab" role="tab" id="tab-all" data-track="all" data-hash="all" aria-selected="true" aria-controls="projects-panel">All</button>
         </div>
 
-        <div class="project-group">
-          <h3 class="group-heading">Software Design &amp; Development</h3>
+        <div class="project-panel" id="projects-panel">
           <ul class="card-grid project-grid">
-            <li class="card project-card">
-              <h4>Pro Rental Order Processing System</h4>
+            <li class="card project-card" data-tracks="fullstack" data-fullstack-order="1">
+              <h3>Pro Rental Order Processing System</h3>
               <p class="card-context">Course project, ICT2112 Software Design, SIT (2026)</p>
               <p class="card-summary">Online ordering for a camera-rental business (catalogue, cart, checkout and payments), built by a team of six.</p>
               <p class="card-role"><strong>My role:</strong> Owned the pricing and deposit component used by checkout and cart.</p>
@@ -156,23 +111,8 @@
                 <a class="card-link" href="pro-rental.html">Read case study</a>
               </div>
             </li>
-            <li class="card project-card">
-              <h4>Fatigue-Aware Late-Night Ride-Sharing App</h4>
-              <p class="card-context">Course project, INF2007 Mobile Application Development, SIT (2026)</p>
-              <p class="card-summary">A mobile app for late-night shift workers to book shared rides on a demand-responsive vehicle, with NFC check-in, live routes and stop alerts designed for tired users.</p>
-              <p class="card-role"><strong>My role:</strong> Built the NFC check-in feature in Kotlin, from the check-in screen to the scanning and validation logic and the ride-status update.</p>
-              <ul class="card-meta" aria-label="Topics">
-                <li>Kotlin</li>
-                <li>Android</li>
-                <li>NFC</li>
-                <li>MVVM</li>
-              </ul>
-              <div class="card-links">
-                <a class="card-link" href="night-ride.html">Read case study</a>
-              </div>
-            </li>
-            <li class="card project-card">
-              <h4>Safesplit – Secure Expense-Splitting App</h4>
+            <li class="card project-card" data-tracks="fullstack frontend" data-fullstack-order="2" data-frontend-order="3">
+              <h3>Safesplit – Secure Expense-Splitting App</h3>
               <p class="card-context">Course project, ICT2216 Secure Software Development, SIT (2026) · Development phase</p>
               <p class="card-summary">Our team's own app: a group expense-splitting web app built by software engineering and information security students together.</p>
               <!-- TODO: replace with the specific feature built, as one of the software engineering developers -->
@@ -187,8 +127,81 @@
                 <a class="card-link" href="safesplit.html">Read case study</a>
               </div>
             </li>
-            <li class="card project-card">
-              <h4>Personal Portfolio Website</h4>
+            <li class="card project-card" data-tracks="fullstack" data-fullstack-order="3">
+              <h3>Fatigue-Aware Late-Night Ride-Sharing App</h3>
+              <p class="card-context">Course project, INF2007 Mobile Application Development, SIT (2026)</p>
+              <p class="card-summary">A mobile app for late-night shift workers to book shared rides on a demand-responsive vehicle, with NFC check-in, live routes and stop alerts designed for tired users.</p>
+              <p class="card-role"><strong>My role:</strong> Built the NFC check-in feature in Kotlin, from the check-in screen to the scanning and validation logic and the ride-status update.</p>
+              <ul class="card-meta" aria-label="Topics">
+                <li>Kotlin</li>
+                <li>Android</li>
+                <li>NFC</li>
+                <li>MVVM</li>
+              </ul>
+              <div class="card-links">
+                <a class="card-link" href="night-ride.html">Read case study</a>
+              </div>
+            </li>
+            <li class="card project-card" data-tracks="fullstack frontend" data-fullstack-order="4" data-frontend-order="4">
+              <h3>Spec-Based Test Suite with CI Quality Gate</h3>
+              <p class="card-context">Personal project (2026)</p>
+              <p class="card-summary">Playwright tests written only from a specification by a separate AI agent, run on every pull request to this site.</p>
+              <p class="card-role"><strong>My role:</strong> Set up the merge gate and triaged failures, catching a bug that only appeared on the live site.</p>
+              <ul class="card-meta" aria-label="Topics">
+                <li>Playwright</li>
+                <li>TypeScript</li>
+                <li>GitHub Actions</li>
+                <li>CI/CD</li>
+              </ul>
+              <div class="card-links">
+                <a class="card-link" href="https://github.com/yuchen310/yuchen-site-tests" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </li>
+            <li class="card project-card" data-tracks="fullstack" data-fullstack-order="5">
+              <h3>Dynamic Security Testing of a Peer Web App</h3>
+              <p class="card-context">Course project, ICT2216 Secure Software Development, SIT (2026) · QA phase</p>
+              <p class="card-summary">In the module's QA phase, black-box security testing of a different team's live web app, used to confirm or rule out issues found during source code review.</p>
+              <p class="card-role"><strong>My role:</strong> Ran the OWASP ZAP scans, including an authenticated scan behind two-factor login; confirmed 6 security header and configuration issues, while a teammate tested manually with Burp Suite.</p>
+              <ul class="card-meta" aria-label="Topics">
+                <li>DAST</li>
+                <li>OWASP ZAP</li>
+                <li>Authenticated Scanning</li>
+                <li>Security Testing</li>
+              </ul>
+              <div class="card-links">
+                <a class="card-link" href="dast.html">Read case study</a>
+              </div>
+            </li>
+            <li class="card project-card" data-tracks="fullstack" data-fullstack-order="6">
+              <h3>QA Audit of a Requirements Engineering Process</h3>
+              <p class="card-context">Course project, ICT2113 Software Requirements Engineering, SIT (2026)</p>
+              <p class="card-summary">An independent audit of how a team produced a requirements specification, checking the process rather than the document.</p>
+              <p class="card-role"><strong>My role:</strong> Sole QA auditor; designed a 23-check checklist and found 9 governance gaps.</p>
+              <ul class="card-meta" aria-label="Topics">
+                <li>Quality Assurance</li>
+                <li>Process Audit</li>
+                <li>Requirements Engineering</li>
+              </ul>
+              <div class="card-links">
+                <a class="card-link" href="qa-audit.html">Read case study</a>
+              </div>
+            </li>
+            <li class="card project-card" data-tracks="fullstack" data-fullstack-order="7">
+              <h3>Cross-Cultural Bias in AI Hiring</h3>
+              <p class="card-context">Integrated Team Project (ICT2114) with SUSS, SIT (2026)</p>
+              <p class="card-summary">Research testing whether large language models favour assertive over collaborative candidates with identical qualifications.</p>
+              <p class="card-role"><strong>My role:</strong> Built the keyword dictionaries behind the experimental materials.</p>
+              <ul class="card-meta" aria-label="Topics">
+                <li>Responsible AI</li>
+                <li>LLM Evaluation</li>
+                <li>NLP</li>
+              </ul>
+              <div class="card-links">
+                <a class="card-link" href="ai-hiring.html">Read case study</a>
+              </div>
+            </li>
+            <li class="card project-card" data-tracks="fullstack frontend" data-fullstack-order="8" data-frontend-order="2">
+              <h3>Personal Portfolio Website</h3>
               <p class="card-context">Personal project (2026)</p>
               <p class="card-summary">This site: plain HTML, CSS and JavaScript with no build step, deployed to GitHub Pages by GitHub Actions.</p>
               <p class="card-role"><strong>My role:</strong> Directed a builder agent and a separate checker agent, reviewing every change before merge.</p>
@@ -201,8 +214,8 @@
                 <a class="card-link" href="https://github.com/yuchen310/yuchen-site" target="_blank" rel="noopener">GitHub</a>
               </div>
             </li>
-            <li class="card project-card">
-              <h4>Train Station Staff Scheduling System</h4>
+            <li class="card project-card" data-tracks="frontend" data-frontend-order="1">
+              <h3>Train Station Staff Scheduling System</h3>
               <p class="card-context">Course project, INF2001 Introduction to Software Engineering, SIT (2025)</p>
               <p class="card-summary">Requirements, design and testing for a system where managers allocate train services to staff each week, while enforcing rules such as exactly one conductor per train.</p>
               <p class="card-role"><strong>My role:</strong> Designed almost all of the Figma wireframes for the manager, staff and IT admin screens, and modelled two use cases: staff viewing and rejecting assigned jobs, and admins updating user accounts.</p>
@@ -217,34 +230,8 @@
                 <a class="card-link" href="https://www.figma.com/design/fdSWLuWIiKrwcCBHg0YOWa/ISE-Train-and-Employee-management" target="_blank" rel="noopener noreferrer">Figma</a>
               </div>
             </li>
-          </ul>
-        </div>
-
-        <div class="project-group">
-          <h3 class="group-heading">AI &amp; Research</h3>
-          <ul class="card-grid project-grid">
-            <li class="card project-card">
-              <h4>Cross-Cultural Bias in AI Hiring</h4>
-              <p class="card-context">Integrated Team Project (ICT2114) with SUSS, SIT (2026)</p>
-              <p class="card-summary">Research testing whether large language models favour assertive over collaborative candidates with identical qualifications.</p>
-              <p class="card-role"><strong>My role:</strong> Built the keyword dictionaries behind the experimental materials.</p>
-              <ul class="card-meta" aria-label="Topics">
-                <li>Responsible AI</li>
-                <li>LLM Evaluation</li>
-                <li>NLP</li>
-              </ul>
-              <div class="card-links">
-                <a class="card-link" href="ai-hiring.html">Read case study</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="project-group">
-          <h3 class="group-heading">Community</h3>
-          <ul class="card-grid project-grid">
-            <li class="card project-card">
-              <h4>Hand Hygiene Awareness Jingle</h4>
+            <li class="card project-card" data-tracks="frontend" data-frontend-order="5">
+              <h3>Hand Hygiene Awareness Jingle</h3>
               <p class="card-context">USI2001 Social Innovation Project with Tan Tock Seng Hospital, SIT (2026)</p>
               <p class="card-summary">An awareness jingle for healthcare workers, shaped by a hospital visit that showed existing reminders caused alert fatigue.</p>
               <p class="card-role"><strong>My role:</strong> Research and the video campaign.</p>

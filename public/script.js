@@ -36,6 +36,87 @@ if (backToTop && hero) {
   });
 }
 
+// Project tracks: tabs filter and reorder the cards in #projects.
+const projectTabList = document.querySelector(".project-tabs");
+
+if (projectTabList) {
+  const tabs = Array.from(projectTabList.querySelectorAll('[role="tab"]'));
+  const panel = document.getElementById("projects-panel");
+  const grid = panel.querySelector(".project-grid");
+  const cards = Array.from(grid.querySelectorAll(".project-card"));
+  const projectsSection = document.getElementById("projects");
+
+  panel.setAttribute("role", "tabpanel");
+  projectTabList.hidden = false;
+
+  function tabForHash(hash) {
+    return tabs.find((tab) => `#${tab.dataset.hash}` === hash);
+  }
+
+  function selectTab(tab, { focus = false, updateHash = false } = {}) {
+    const track = tab.dataset.track;
+
+    tabs.forEach((t) => {
+      const selected = t === tab;
+      t.setAttribute("aria-selected", String(selected));
+      t.tabIndex = selected ? 0 : -1;
+    });
+    panel.setAttribute("aria-labelledby", tab.id);
+
+    // "All" keeps the source order (Full-Stack first, then Frontend-only).
+    // DOM order is changed (not CSS order) so keyboard and reading order match what is shown.
+    const ordered =
+      track === "all"
+        ? cards
+        : cards
+            .filter((card) => card.dataset.tracks.split(" ").includes(track))
+            .sort((a, b) => Number(a.dataset[`${track}Order`]) - Number(b.dataset[`${track}Order`]));
+
+    cards.forEach((card) => {
+      card.hidden = !ordered.includes(card);
+    });
+    grid.append(...ordered);
+
+    if (focus) tab.focus();
+    if (updateHash) {
+      history.replaceState(null, "", `#${tab.dataset.hash}`);
+    }
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => selectTab(tab, { updateHash: true }));
+  });
+
+  projectTabList.addEventListener("keydown", (event) => {
+    const current = tabs.indexOf(document.activeElement);
+    if (current === -1) return;
+
+    let next;
+    if (event.key === "ArrowRight") next = (current + 1) % tabs.length;
+    else if (event.key === "ArrowLeft") next = (current - 1 + tabs.length) % tabs.length;
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = tabs.length - 1;
+    else return;
+
+    event.preventDefault();
+    selectTab(tabs[next], { focus: true, updateHash: true });
+  });
+
+  function applyHash({ scroll }) {
+    const tab = tabForHash(location.hash);
+    if (tab) {
+      selectTab(tab);
+      if (scroll) projectsSection.scrollIntoView({ behavior: "instant", block: "start" });
+    } else if (!location.hash || location.hash === "#") {
+      selectTab(tabs.find((t) => t.dataset.track === "all"));
+    }
+  }
+
+  // Deep links such as index.html#frontend select that tab and scroll to #projects.
+  applyHash({ scroll: true });
+  window.addEventListener("hashchange", () => applyHash({ scroll: true }));
+}
+
 function repoCard(repo) {
   const card = document.createElement("li");
   card.className = "card";
